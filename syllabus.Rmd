@@ -1,0 +1,258 @@
+---
+citecolor: cyan
+fontsize: 11pt
+geometry: margin=0.85in
+linkcolor: magenta
+urlcolor: magenta
+output: pdf_document
+---
+
+\renewcommand{\baselinestretch}{1.1} \selectfont
+ \begin{center}
+    {\Large 
+    Eco 4306: Economic and Business Forecasting \\ \medskip
+    Texas Tech University \\
+    Spring 2019} \\
+    \bigskip\bigskip
+    {\bf \Large Syllabus}
+\end{center} \bigskip
+
+Lectures: MWF 10:00 a.m. - 10:50 a.m., 00226 Holden Hall  
+Website: TBA  
+
+\medskip
+
+\begin{tabular*}{0.9\textwidth}%
+    {@{\extracolsep{\fill}}ll} 
+    Instructor: Jan Duras  & Teaching Assistant: TBA \\
+    Office: 257 Holden Hall  & Office: TBA \\
+    E-mail: \href{mailto:jan.duras@ttu.edu}{jan.duras@ttu.edu} & E-mail: TBA \\
+    Office Hours: T 4 p.m. - 6 p.m. & Office Hours: TBA  \\
+\end{tabular*} \bigskip
+
+<!--
+----------------------------------------                    ----------------------------------------
+Instructor: Jan Duras                                       \hspace{7cm} Teaching Assistant: TBA
+Office: 257 Holden Hall                                     \hspace{7cm} Office: TBA
+E-mail: \href{mailto:jan.duras@ttu.edu}{jan.duras@ttu.edu}  \hspace{7cm} E-mail:TBA
+Office Hours: TBA                                           \hspace{7cm} Office Hours: TBA
+----------------------------------------                    ----------------------------------------
+-->
+
+Please check emails daily for announcements; when sending an email start subject with **Eco 4306**.
+
+
+**TEXTBOOK**
+
+Gonzalez-Rivera, G., [Forecasting for Economics and Business](https://www.routledge.com/products/9780131474932), 1st edition. Routledge, 2012
+\bigskip
+
+
+**PREREQUISITES**
+
+Math 2345 or instructor consent. Familiarity with EViews software package is an advantage but it's not required. We will discuss in class how to use it to build forecasts. Two alternative student versions of EViews software package, one free and one for $49.95, are available from the  developer's [website](http://www.eviews.com/EViews10/EViews10Univ/evuniv10.html).
+<!--
+Two alternative student versions of EViews software package, one free and one for $49.95, are available from the  developer's [website](http://www.eviews.com/EViews10/EViews10Univ/evuniv10.html).
+-->
+\bigskip
+
+
+**COURSE DESCRIPTION**
+
+Knowledge of forecasting methods is a highly demanded skill in the modern economy. This course aims to provide an introduction to these methods, and the main goal is to learn how to apply them in practice to univariate and multivariate models in economics, business and finance. We will cover the tools needed to analyze time series data, to build forecasting models, and to critically evaluate competing forecasts. Since the emphasis is on learning how to apply the forecasting methods to data, students should expect to spend a nontrivial amount of time outside of class working on assignments in EViews.
+<!--
+- shorter description
+Application of forecasting methods based on ARMA, VAR, VEC, GARCH models for macroeconomic variables 
+(GDP, unemployment, inflation, ...), business time series (sales, costs, ...) and financial time series (asset returns, their volatility, ...)
+- super short description
+Application of forecasting methods based on ARMA, VAR, VEC, GARCH models for macroeconomic variables, business time series and financial time series.
+-->
+\bigskip
+
+
+**LEARNING OUTCOMES**
+
+Upon successful completion of the course students will  
+1. gain familiarity with EViews software package and know how to use it to analyze time series data  
+2. understand statistical techniques applied to model economic, business and financial time series data  
+3. be able to independently develop suitable models to forecast economic or financial data  
+4. be able to evaluate the forecasting performance of various models and choose the most appropriate model among the alternatives
+
+Assessment of learning outcomes will be based on quizzes, homeworks and exams. Quizzes (focused on key concepts) and homeworks (focused on application of forecasting methods in EViews, interpretation, and critical evaluation of results), will be used as tools to periodically monitor students' progress. The most problematic parts will be reviewed and discussed in class to provide feedback.
+
+\newpage
+
+
+**GRADING**
+
+<!--
+Course assessment will be based on homework assignments, quizzes, midterms and a final exam. 
+-->
+
+Final grade will be computed by choosing the highest of the following three grading options.
+
+---            ----------  ----------  ----------
+Assignments     30%         30%         30%
+Attendance       5%          5%          5%
+Horse Idioms     5%          5%          5%
+Midterm exam 1  22%         14%         23%
+Midterm exam 2  22%         23%         14%
+Final exam      21%         28%         28%
+---            ----------  ----------  ----------
+
+Below are the grading cut-off points: 
+
+<!--
+---     ---     ---     ---     ---     ---     ---     ---     ---     ---     
+92-100  90-92   88-90   82-88   80-82   78-80   72-78   70-72   60-70   below 60 
+A       A-      B+      B       B-      C+      C       C-      D       F
+---     ---     ---     ---     ---     ---     ---     ---     ---     ---     
+
+---     ---       ---       ---       ---       ---       ---       ---       ---       ---     
+92-100  90-91.9   88-89.9   82-87.9   80-81.9   78-79.9   72-77.9   70-71.9   60-69.9   below 60 
+A       A-        B+        B         B-        C+        C         C-        D         F
+---     ---       ---       ---       ---       ---       ---       ---       ---       ---     
+-->
+
+---     ---       ---       ---     ---     ---     ---     ---     ---     
+A       A-        B+        B       B-      C+      C       D       F
+92%     90%       88%       82%     80%     78%     70%     60%     below 60% 
+---     ---       ---       ---     ---     ---     ---     ---     ---     
+\bigskip
+
+**EXAMS**
+
+Midterm Exam 1: Monday, February 25, in class  
+Midterm Exam 2: Monday, April 8, in class  
+Final Exam: Saturday, May 11, 10:30 a.m. - 1:00 p.m. (cumulative exam, covers all material)
+\bigskip
+
+
+**ASSIGNMENTS**
+
+Each assignment has the same weight. All assignments are due in class, before the lecture. Assignments can be submitted up to 7 days late but with a 10% penalty for each day the assignment is late.
+
+<!--
+------  ----------------
+HW1     Wednesday, January 30
+HW2     Wednesday, February 6
+HW3     Wednesday, February 13
+HW4     Wednesday, February 20
+HW5     Wednesday, March 6
+HW6     Wednesday, March 27
+HW7     Wednesday, April 3
+HW8     Wednesday, April 17
+HW9     Wednesday, April 24
+HW10    Wednesday, May 1
+------  ----------------
+-->
+
+Students are encouraged to work in study groups, but each student is responsible for writing up own solution and needs to acknowledge people he/she worked with on the assignment. 
+\bigskip
+
+<!--
+**QUIZZES**
+
+Between 5 and 10 short quizzes will be given in class on random days. 
+-->
+
+**HORSE IDIOMS**
+
+One horse related idiom will be mentioned during (almost) every lecture, depending on how many you can provide in last lecture with dates when they appeared you can get up to 5%.
+\bigskip
+
+
+**ATTENDANCE, CLASS PARTICIPATION**
+
+Attendance is mandatory. Participation is valued and you can get up to 2\% extra, which can bump up your grade from e.g. from B+ to A-/A, if you are a borderline case and if were active in class discussions. I will not lower your grade if you don't participate or if your comments are off. 
+
+Use of electronic devices in the class is not permitted unless instructed otherwise. All devices should be silenced/turned off and put away. Photos or video may not be taken without permission. You should not share any course material those not enrolled in this class this semester, or sites similar to coursehero.com. 
+
+\newpage
+
+
+**COURSE OUTLINE**
+
+This is a tentative outline for the course - details and timing are subject to change.   
+
+------   ----------------------------------------------------------------------------
+Week  1  **Introduction**
+         Chapter 1
+Week  2  **Basic Statistics Concepts. Linear Regression Model (OLS)**
+         Appendix A and Chapter 2 
+Week  3  **Statistics and Time Series. Tools of the Forecaster.**
+         Chapter 3 and 4
+Week  4  **Moving Average (MA) Processes** 
+         Chapter 6
+Week  5  **Autoregressive (AR) Processes**
+         Chapter 7
+Week  6  **Autoregressive Moving Average (ARMA) processes**
+         Chapter 7
+Week  7  **Seasonal Patterns and Seasonal Models (SARIMA)**
+         Chapter 7 and 8
+Week  8  **Evaluating Forecasts**
+         Chapter 9
+Week  9  **Spring Break**
+         N/A
+Week 10  **Deterministic and Stochastic Trends. Unit Root Tests. (ADF, KPSS)**
+         Chapter 10
+Week 11  **System of Equations: Vector Autoregression (VAR)**
+         Chapter 11
+Week 12  **Long Run: Cointegration**
+         Chapter 12
+Week 13  **Short Run: Error Correction Models (ECM)**
+         Chapter 12
+Week 14  **Forecasting Volatility (MA, EWMA)**
+         Chapter 13
+Week 15  **Forecasting Volatility (ARCH, GARCH)**
+         Chapter 14
+Week 16  **Financial Applications of Time-varying Volatility (VaR, ES)**
+         Chapter 15
+------   ----------------------------------------------------------------------------
+
+\newpage
+
+
+\begin{center}
+{\bf PROCEDURES AND POLICIES}
+\end{center}
+
+**STUDENT HANDBOOK**
+
+Texas Tech University Student Handbook can be found at [http://www.depts.ttu.edu/dos/handbook/]([http://www.depts.ttu.edu/dos/handbook/])
+
+**MAKE-UP EXAMS**
+
+Make-up exams are allowed only with a valid, official and acceptable university excuse. Please contact me as early as possible if you realize that you will miss an exam. For more information on make-up exams please visit:
+[http://www.depts.ttu.edu/testing/makeup\_exams.php](www.depts.ttu.edu/testing/makeup\_exams.php)
+
+
+**SPECIAL ACCOMMODATIONS**
+
+Students who may need special arrangements to complete the course requirements should contact me as soon as possible to request the necessary accommodations. You are required to present any appropriate verification from the Student Disability Services [http://www.depts.ttu.edu/students/sds/](https://www.depts.ttu.edu/students/sds/). All requests are confidential. 
+
+
+**RELIGIOUS HOLY DAYS**
+
+Religious holy day means a holy day observed by a religion whose places of worship are exempt from property taxation under Texas Tax Code Section 11.20. Student who intends to observe a religious holy day should inform the instructor in writing prior to the absence. An excused student absent from classes for the observance of a religious holy day is not going to be penalized for the absence and will be allowed to take an examination or complete an assignment scheduled for that day within a reasonable time after the absence. See Texas Tech University Operating Policy 34.19.
+[http://www.depts.ttu.edu/opmanual/OP34.19.pdf](https://www.depts.ttu.edu/opmanual/OP34.19.pdf)
+
+
+**ACADEMIC INTEGRITY**
+
+Academic integrity is taking responsibility for one's own work, being individually accountable, and demonstrating intellectual honesty and ethical behavior. Academic dishonesty will not be tolerated in any form and will result in disciplinary action. Texas Tech University Code of Student Conduct defines scholastic dishonesty as cheating, plagiarism, collusion, falsifying academic records, misrepresenting facts, violations of published professional ethics/standards, and any act or attempted act designed to give unfair academic advantage to oneself or another student. See 
+[http://www.depts.ttu.edu/studentconduct/academicinteg.php](http://www.depts.ttu.edu/studentconduct/academicinteg.php) for further discussion of issues related to Academic Integrity; for more
+information on Code of Student Conduct visit 
+[http://www.depts.ttu.edu/dos/handbook/conduct.php](http://www.depts.ttu.edu/dos/handbook/conduct.php)
+
+
+**STUDENT CONDUCT AND CLASSROOM BEHAVIOR:**
+
+Students are expected to contribute to a calm, productive, and learning environment. Please check this website for information on student classroom behavior issues [http://www.depts.ttu.edu/dos/handbook/conduct.php](http://www.depts.ttu.edu/dos/handbook/conduct.php)
+
+
+**COMPLAINTS OR CONCERNS:**
+
+Please contact your instructor or TA if you have any complaints/concerns about the course. If your concerns are not resolved after talking with your instructor, you can contact: Professor Klaus Becker, Chair of the Department of Economics, 248 Holden Hall, 806-834-7275, [klaus.becker@ttu.edu](mailto:klaus.becker@ttu.edu)
+
+
