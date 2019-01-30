@@ -24,10 +24,11 @@ Website: TBA
 
 \begin{tabular*}{0.9\textwidth}%
     {@{\extracolsep{\fill}}ll} 
-    Instructor: Jan Duras  & Teaching Assistant: TBA \\
-    Office: 257 Holden Hall  & Office: TBA \\
-    E-mail: \href{mailto:jan.duras@ttu.edu}{jan.duras@ttu.edu} & E-mail: TBA \\
-    Office Hours: T 4 p.m. - 6 p.m. & Office Hours: TBA  \\
+    Instructor: Jan Duras  & Teaching Assistant: Maruf Morshed \\
+    Office: 257 Holden Hall  & Office: 232 Holden Hall \\
+    E-mail: \href{mailto:jan.duras@ttu.edu}{jan.duras@ttu.edu} & E-mail: \href{mailto:Maruf.Morshed@ttu.edu
+}{Maruf.Morshed@ttu.edu} \\
+    Office Hours: T 4 p.m. - 6 p.m. & Office Hours: TR 9:30 - 11:00 a.m.  \\
 \end{tabular*} \bigskip
 
 <!--
