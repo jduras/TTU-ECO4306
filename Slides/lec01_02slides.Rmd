@@ -1,0 +1,557 @@
+---
+title: "Eco 4306 Economic and Business Forecasting"
+subtitle: | 
+            | Chapter 1: Introduction
+#            | Lecture 1 and 2
+author: 
+date: 
+fontsize: 8pt
+urlcolor: magenta
+linkcolor: magenta
+output: 
+  beamer_presentation:
+#    incremental: true
+    includes:
+      in_header: lecturesfmt.tex
+    highlight: tango
+    fonttheme: professionalfonts
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+```
+
+
+```{r}
+library(tidyverse)
+library(tidyquant)
+library(timetk)
+library(tis)
+library(lubridate)
+library(scales)
+```
+
+
+## 1.1 What Is Forecasting?
+
+- *stock markets*: On March 22, 2010, Fortune magazine asked Wilbur Ross in an [interview](http://fortune.com/2016/11/16/trump-commerce-contender-wilbur-ross-once-told-fortune-government-is-investors-biggest-concern/) how he saw 2010. He answered that the year would be volatile but that some stocks would perform well despite the environment
+
+- *U.S. GDP*: The Wall Street Journal Economic Forecasting Survey of 60 economists  [predicts](http://projects.wsj.com/econforecast/?standalone=1#ind=gdp&r=20) the GDP to grow at 3.5\% in 2018
+
+- *U.S. bank bailouts*: in March 2010 a U.S. Treasury Department [report](https://www.treasury.gov/initiatives/financial-stability/reports/Documents/09%20OFS_CitizensReport%20MAR2.pdf) predicted that the cost of the Troubled Asset Relief Program (TARP) to taxpayers would eventually be $117 billion.
+
+
+
+## 1.1 What Is Forecasting?
+
+- some predictions in the above examples are detailed, some are sketchy concerning magnitude and/or date of occurrence of the future event
+
+- in addition, note that in the above examples there is no information provided about how certain the forecasters are about the predictions
+
+
+## 1.1 What Is Forecasting?
+
+- **forecasting is the science and the art to predict a future event with some degree of accuracy**
+
+- why forecasting is science
+    - statistical methods are used to analyze available information to discover patterns in historical data 
+    - econometric models are constructed to form a forecast conditional on information available
+
+- why forecasting is an art
+    - statistical methods have limitations - they depend on a set of assumptions, which may or may not be satisfied by data, models are limited representations of the economic and business environments
+    - forecasters accumulate soft human capital that is useful in modifying the forecast provided by a statistical model - judgment is needed to do this 
+
+
+
+## 1.1 What Is Forecasting?
+
+> Prediction is very difficult, especially if it's about the future.
+> 
+> --- [Niels Bohr](https://en.wikipedia.org/wiki/Niels_Bohr)
+
+
+
+## 1.1 What Is Forecasting?
+
+\begin{figure}[h]
+    \includegraphics[width=11cm]{figures/lec01bad_forecasts.jpg}
+\end{figure}
+
+
+
+## 1.1 What Is Forecasting?
+
+- we can distinguish between **event forecast** and **time series forecast**
+
+- **event forecast** refers to the future occurrence of an outcome and/or the timing of such an occurrence
+    - Will the Federal Reserve raise interest rates at its next FOMC board [meeting](https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm)?
+    - When will the current economic expansion [end](http://www.frbsf.org/economic-research/publications/economic-letter/2016/february/will-economic-recovery-die-of-old-age/)?
+    - How long will the Trump stock market rally last?
+    - Will the euro appreciate by more than 10\% in 2019?
+
+- **time series forecast** refers to the use of time series information in the prediction of the variable of interest at some point in the future
+    - event forecast is often based on a time series forecast
+
+
+## 1.1 What Is Forecasting?
+
+- we should not expect a forecast to be exactly accurate very time, especially not by hitting the exact future value of the variable of the interest
+
+- but we expect the forecast to be statistically sound and preferably offer a measure of the uncertainty of the predictions
+
+- *U.S. Presidential Elections*: On November 8, 2016 538's [final forecast](http://fivethirtyeight.com/features/final-election-update-theres-a-wide-range-of-outcomes-and-most-of-them-come-up-clinton/) gave Donald Trump 28\% chance to win electoral vote; The Upshot [final forecast](https://www.nytimes.com/interactive/2016/upshot/presidential-polls-forecast.html) gave him 15\% chance
+
+- *NBA finals*: On December 23, 2016 538's [NBA forecast](https://fivethirtyeight.com/features/the-cavs-and-warriors-might-be-doing-this-finals-thing-for-a-long-time/) gave Warriors 59\% chance of reaching the finals again, and a 22\% chance of facing Cavaliers in the finals again
+
+
+## 1.2 Who Are the Users of Economic Forecasts?
+
+- today's decisions by firms, households, and also by governments or central banks depend on expectations about the future
+
+- expectations about future are in turn based on forecasts
+
+
+## 1.2.1 Firms
+
+- firm contemplating a business expansion or planning to launch a new product needs a forecast of the associated future costs and revenues
+
+- banks and investment companies deciding how to allocate financial capital and manage risk, need forecasts of asset prices and of their volatility
+
+
+## 1.2.2 Consumers
+
+- household's decisions about current consumption is based on current income and also expected future income, which depends on the business cycle in the economy, the state of labor markets, and the state of capital markets
+- decisions regarding car loans, mortgages, and savings for retirement rely on forecasts of future earnings and income, future prices, interest rates
+- decisions about investment in education rely on its impact on the prospects of employment
+
+
+## 1.2.3 Government
+
+- many federal and state agencies have departments staffed by professional forecasters tasked with predicting the behavior of various macroeconomic variables - gross domestic product, consumption, investment, exports, imports, employment, prices, interest rates, exchange rates, ...
+
+- these forecasts are key to making major decisions in fiscal and monetary policies
+
+
+## 1.3 Features of a Time Series - Trends, Cycles, Seasonality, Volatility
+
+- in this course, we will focus on time series forecasts - predictions of the variable of interest at some point in the future
+
+- a **time series** is a sequence of numerical values ordered according to time $\{y_t\} = \{y_1, y_2,\ldots,y_t\}$
+
+- a time series data point is a pair $(t, y_t)$
+
+- example: if $y_t$ is U.S. real GDP growth rate, in 2017 it was 2.2%, thus $y_{2017} = 0.022$
+
+- example: if $y_t$ is U.S. population, in 1990 it was about 248.7 million, thus $y_{1990} = 248.7$
+
+
+## 1.3 Features of a Time Series - Trends, Cycles, Seasonality, Volatility
+
+- the first step in data analysis is to plot the data
+
+- a time series plot: in the horizontal axis, we plot time, and in the vertical axis, we plot the value of the variable
+
+- it is useful to visualize time series to foster intuition about the data and to spot features that will guide us in the choice of the model  
+(trends, cycles, seasonal patterns, breaks, outliers/unusual observations, changes in volatility, relationships between variables, ...)
+
+- the features identified in the plots are then be incorporated into the forecasting methods
+
+
+
+## 1.3 Features of a Time Series - Trends, Cycles, Seasonality, Volatility
+
+- general features in economic time series can be classified within three broad categories: **trends, cycles**, and **seasonality**
+
+- **trend** is a tendency of the time series to either grow or decline over the long term 
+
+- **seasonality** refers to regular patterns arising in economic activity due to calendar (on quarterly, monthly, day of week basis)
+
+- **cycles** refer to patterns where the data rises and falls that are not of fixed period/duration (so while seasonal pattern has constant length cyclic pattern
+has variable length)
+
+\medskip
+
+- timing of peaks and troughs is predictable with seasonal data, but unpredictable in the long term with cyclic data
+
+
+
+## 1.3 Features of a Time Series - Trends, Cycles, Seasonality, Volatility
+
+- general features in economic time series can be classified within three broad categories: **trends, cycles**, and **seasonality**
+
+- given time series can exhibit one or several of these features
+
+- example: U.S. real GDP exhibits a general upward trend, but there are deviations around this trend - sometimes the time series goes above the trend (expansions) and sometimes below (recessions) forming a cycle around the trend
+
+
+## 1.3 Features of a Time Series - Trends, Cycles, Seasonality, Volatility
+
+```{r}
+rec_dates <- nberDates() %>%
+        as_tibble() %>%
+        mutate_all(. %>% as.character() %>% as.Date(format = "%Y%m%d"))
+
+# define function for plots with recession shading - ggplot based
+myggplot <- function(mydata, mytitle = "", mylabels){
+
+    rec.dates <- nberDates() %>%
+        as_tibble() %>%
+        mutate_all(. %>% as.character() %>% as.Date(format = "%Y%m%d"))
+
+    dates <- as.Date(index(mydata))
+    
+    fst.year <- as.Date(floor_date(range(dates)[1], "5 years") - 365.25)
+    lst.year <- as.Date(ceiling_date(range(dates)[2], "5 years") - 365.25)
+    start.end <- c(fst.year, lst.year)
+    
+    if (is.null(ncol(mydata))) {
+        g <- ggplot(mydata) +
+                geom_rect(data = rec.dates, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf), alpha = 0.1) +
+                geom_line(aes(x = dates, y = mydata), size = 0.5, color = "blue") +
+                xlim(as.Date(range(dates))) +
+                labs(x = "", y = "", title = mytitle) +
+                theme_bw() +
+                theme(plot.title = element_text(size = 14), 
+                      legend.position = "bottom", 
+                      legend.key = element_blank())
+                
+    }
+    else {
+        g <- ggplot(mydata) +
+                geom_rect(data = rec.dates, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf), alpha = 0.1) +
+                geom_line(aes(x = dates, y = mydata[,1], colour = "var1"), size = 1) +
+                geom_line(aes(x = dates, y = mydata[,2], colour = "var2"), size = 1) +
+                geom_line(aes(x = dates, y = mydata[,3], colour = "var3"), size = 1) +
+                geom_line(aes(x = dates, y = mydata[,4], colour = "var4"), size = 1) +
+                xlim(as.Date(range(dates))) +
+                scale_x_date(limits = start.end, breaks = date_breaks("5 years"), labels = date_format("%Y")) + 
+                labs(x = "", y = "", title = mytitle) +
+                scale_colour_manual("",
+                                    values = c("black", "blue", "red", "green"),
+                                    breaks = c("var1", "var2", "var3", "var4"),
+                                    labels = mylabels) +
+                guides(colour = guide_legend(override.aes = list(size = c(1, 1, 1, 1)))) +
+                theme_bw() +
+                theme(plot.title = element_text(size = 14), 
+                      legend.position = "bottom", 
+                      legend.key = element_blank())
+    }
+#            geom_hline(yintercept=0, linetype="dotted") +
+    g
+}
+```
+
+
+
+```{r fig.height=5}
+library(Quandl)
+Quandl.api_key('DLk9RQrfTVkD4UTKc7op')
+
+x <- Quandl("FRED/GDPC1", type="zoo")
+par(mfrow=c(1,1), cex=1)
+# plot(x, xlab="", ylab="", main="Real GDP (seasonally adjusted)")
+# plot(diff(log(x)), xlab="", ylab="", main="Log-Change in Real GDP (seasonally adjusted)")
+myggplot(x, mytitle="U.S. Real GDP, Billion of 2012 Dollars, Seasonally Adjusted Annual Rate", mylabels="")
+```
+
+$_{}$ \hspace*{0.75cm} https://research.stlouisfed.org/fred2/series/GDPC1
+
+
+## 1.3.1 Trends
+
+<!--
+**working like a horse**
+-->
+
+- output $Y$, labor productivity (defined as output per hour) $y$, employment $E$ and hours per worker $h$ are related through
+$$
+    Y = y \times E \times H
+$$
+- output, labor productivity, and employment show an upward trend
+
+- hours per worker remained relatively stable
+ 
+- important to pay attention and understand the measurement units of the variables of interest
+
+- some economic variables are reported as indexes, in this case to interpret the plot we need to know the base year for which the value of the index is equal to 100
+
+
+## 1.3.1 Trends
+
+```{r fig.height=5}
+x_tbl <- c("OUTNFB", "OPHNFB", "PRS85006013", "PRS85006023") %>%
+    tq_get(get = "economic.data", from = "1947-01-01", to = "2018-12-31") %>%
+    group_by(symbol) %>%
+    mutate(value = 100 * price / price[date == "1947-01-01"]) %>%
+    ungroup() %>%
+    select(date, symbol, value) %>%
+    spread(symbol, value)
+
+x_xts <- x_tbl %>%
+    tk_xts(select = c(OUTNFB, OPHNFB, PRS85006013, PRS85006023), date_var = date)
+
+myggplot(x_xts, mytitle = "U.S. Nonfarm Business Sector, Main Indicators, Indices, 1947Q1=100", 
+         mylabels = c("Real Output", "Output per Hour", "Employment", "Hours Per Worker"))
+```
+
+$_{}$ \hspace*{0.75cm} https://fred.stlouisfed.org/graph/?g=crl9
+
+
+
+## 1.3.2 Cycles
+
+- when a time series exhibits periodic fluctuations, we say that it has a cycle
+
+- cycle may be seasonal or nonseasonal
+
+- example: time series for unemployment rate has both seasonal cycle (it peaks in January and in June/July) and a nonseasonal cycle (it rises during recessions)
+
+
+```{r fig.height=5}
+x_tbl <- c("UNRATE", "UNRATENSA") %>%
+    tq_get(get = "economic.data", from = "1970-01-01", to = "2018-12-31") 
+
+x_tbl %>%
+    mutate(symbol_label = recode(symbol, UNRATE = "SA", UNRATENSA = "NSA"),
+           value = price / 100) %>%
+    ggplot(data = .) +
+        geom_rect(data = rec_dates, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf), alpha = 0.1) +
+        geom_line(aes(x = date, y = value, colour = symbol_label), size = 0.5) +
+        scale_color_manual(values = c("gray60", "blue")) +
+        scale_y_continuous(limits = c(0.02, 0.12), breaks = seq(0, 0.12, 0.02), labels = percent_format(accuracy = 1)) +
+        xlim(as.Date(c("1970-01-01", "2018-12-31"))) +
+        labs(title = "U.S. Unemployment Rate", 
+             subtitle = "Not Seasonally Adjusted (SA) vs Seasonally Adjusted (SA)",
+             x = "", y = "", color = "") +
+        theme_bw() +
+        theme(plot.title = element_text(size = 14), 
+              legend.position = c(0.9, 0.935),
+              legend.key =  element_blank(),
+              legend.background = element_blank()) 
+```
+
+$_{}$ \hspace*{0.75cm} https://fred.stlouisfed.org/graph/?g=mHDf
+
+
+## 1.3.3. Seasonality
+
+- a cycle is seasonal when specific fluctuations occur within the calendar year, for instance activities that peak in summer months (or in specific quarters, days, hours, etc.). 
+
+- for example: retail and food services sales shown below exhibit a strong seasonal cycle with pronounced peak in December and dip in January
+
+```{r fig.height=5}
+x_tbl <- c("RSAFS", "RSAFSNA") %>%
+    tq_get(get = "economic.data", from = "1992-01-01", to = "2018-12-31") 
+
+x_tbl %>%
+    mutate(symbol_label = recode(symbol, RSAFS = "SA", RSAFSNA = "NSA"),
+           value = as.numeric(price)) %>%
+    ggplot(data = .) +
+        geom_rect(data = rec_dates, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf), alpha = 0.1) +
+        geom_line(aes(x = date, y = value, colour = symbol_label), size = 0.5) +
+        scale_color_manual(values = c("gray40", "blue")) +
+        scale_y_continuous(limits = c(100000, 600000), breaks = seq(100000, 600000, 100000), labels = number_format(accuracy = 1)) +
+        xlim(as.Date(c("1992-01-01", "2018-12-31"))) +
+        labs(title = "Retail and Food Services Sales, in Millions of Dollars", 
+             subtitle = "Not Seasonally Adjusted (SA) vs Seasonally Adjusted (SA)",
+             x = "", y = "", color = "") +
+        theme_bw() +
+        theme(plot.title = element_text(size = 14), 
+              legend.position = c(0.95, 0.935),
+              legend.key =  element_blank(),
+              legend.background = element_blank()) 
+```
+
+$_{}$ \hspace*{0.75cm} https://fred.stlouisfed.org/graph/?g=mHDh
+
+
+## 1.3.4. Seasonality
+
+```{r fig.height=5}
+x_tbl <- c("RSAFS", "RSAFSNA") %>%
+    tq_get(get = "economic.data", from = "1992-01-01", to = "2018-12-31") 
+
+x_tbl %>%
+    mutate(symbol_label = recode(symbol, RSAFS = "SA", RSAFSNA = "NSA"),
+           value = price/lag(price) - 1) %>%
+    ggplot(data = .) +
+        geom_rect(data = rec_dates, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf), alpha = 0.1) +
+        geom_hline(yintercept = 0, color = "gray60") +
+        geom_line(aes(x = date, y = value, colour = symbol_label), size = 0.5) +
+        scale_color_manual(values = c("gray40", "blue")) +
+        scale_y_continuous(limits = c(-0.3, 0.2), breaks = seq(-0.3, 0.2, 0.10), labels = percent_format(accuracy = 1)) +
+        xlim(as.Date(c("1993-01-01", "2018-12-31"))) +
+        labs(title = "Retail and Food Services Sales, Percentage Change", 
+             subtitle = "Not Seasonally Adjusted (SA) vs Seasonally Adjusted (SA)",
+             x = "", y = "", color = "") +
+        theme_bw() +
+        theme(plot.title = element_text(size = 14), 
+              legend.position = c(0.95, 0.935),
+              legend.key =  element_blank(),
+              legend.background = element_blank())
+```
+
+$_{}$ \hspace*{0.75cm} https://fred.stlouisfed.org/graph/?g=mHD6
+
+
+## 1.3.4. Volatility
+
+```{r fig.height=5}
+x_tbl <- c("DCOILWTICO") %>%
+    tq_get(get = "economic.data", from = "1985-01-01", to = "2018-12-31") 
+
+x_tbl %>%
+    ggplot(data = .) +
+        geom_rect(data = rec_dates, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf), alpha = 0.1) +
+        geom_line(aes(x = date, y = price), size = 0.5, color = "blue") +
+        xlim(as.Date(c("1985-01-01", "2018-12-31"))) +
+        labs(title = "Crude Oil Prices: West Texas Intermediate, Dollars per Barrel, Not Seasonally Adjusted", 
+             # subtitle = "Not Seasonally Adjusted",
+             x = "", y = "", color = "") +
+        theme_bw() +
+        theme(plot.title = element_text(size = 14), 
+              legend.position = c(0.95, 0.935),
+              legend.key =  element_blank(),
+              legend.background = element_blank())
+```
+
+$_{}$ \hspace*{0.75cm} https://fred.stlouisfed.org/series/DCOILWTICO
+
+
+## 1.3.4. Volatility
+
+```{r fig.height=5}
+# x <- Quandl("FRED/DCOILWTICO", type="zoo")
+# dlx <- diff(log(x))
+# dlx <- 100*( x/lag(x,k=-1)-1 )
+# par(mfrow=c(1,1), cex=1)
+# myggplot(dlx, mytitle="Percentage Change, Crude Oil Prices: West Texas Intermediate, Not Seasonally Adjusted", mylabels="")
+
+x_tbl <- c("DCOILWTICO") %>%
+    tq_get(get = "economic.data", from = "1985-01-01", to = "2018-12-31") 
+
+x_tbl %>%
+    mutate(value = price/lag(price) - 1) %>%
+    ggplot(data = .) +
+        geom_rect(data = rec_dates, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf), alpha = 0.1) +
+        geom_line(aes(x = date, y = value), size = 0.5, color = "blue") +
+        scale_y_continuous(limits = c(-0.2, 0.2), breaks = seq(-0.3, 0.2, 0.10), labels = percent_format(accuracy = 1)) +
+        xlim(as.Date(c("1985-01-01", "2018-12-31"))) +
+        labs(title = "Crude Oil Prices: West Texas Intermediate, Percentage Change, Not Seasonally Adjusted", 
+             # subtitle = "Not Seasonally Adjusted",
+             x = "", y = "", color = "") +
+        theme_bw() +
+        theme(plot.title = element_text(size = 14), 
+              legend.position = c(0.95, 0.935),
+              legend.key =  element_blank(),
+              legend.background = element_blank())
+```
+
+$_{}$ \hspace*{0.75cm} https://fred.stlouisfed.org/graph/?g=mHD7
+
+
+
+## 1.4. Basic Notation and Objective of the Forecaster
+
+\scriptsize
+
+description                 technical name                          notation
+---                         ---                                     ---
+object to analyze           time series                             $\{y_t\}$
+value at present time $t$   known value of the series               $y_t$
+future at time $t+h$        random variable                         $Y_{t+h}$
+value at future time $t+h$  unknown value of random variable        $y_{t+h}$
+collection of information   univariate information set              $I_t = \{y_1, y_2, \ldots, y_t\}$
+                            multivariate information set            $I_t = \{y_1, y_2, \ldots , y_t, x_1, x_2, \ldots, x_t\}$
+objective                   $h$-step ahead forecast                 $f_{t,h}$
+mistake made                $h$-step ahead forecast error           $e_{t,h}=y_{t+h}-f_{t,h}$
+---                         ---                                     ---
+
+
+## 1.4. Basic Notation and Objective of the Forecaster
+
+- when we analyze just one time series, the analysis is **univariate**, when we analyze several time series jointly, the analysis is called **multivariate**
+
+- future is unknown and represented by a random variable $Y_{t+h}$, we will characterize $Y_{t+h}$ by specifying its conditional probability density function
+
+- forecast step $h$ could be in minutes, days, months, or so on, depending on the frequency of the time series
+
+- example: if the time series is monthly interest rates and $h = 2$, we are interested in forecasting the 2-month-ahead interest rates, if the time series is quarterly real GDP growth rate and $h = 2$, we are interested in forecasting the 2-quarter-ahead real GDP growth rate
+
+
+
+## 1.4. Basic Notation and Objective of the Forecaster
+
+- at the present time $t$, we wish to forecast $Y_{t+h}$, given information set that contains past values the series $I_t = \{y_1, \ldots, y_t\}$
+
+- example: hourly time series for Akkoro Kamui's activities, before the fortress was built
+$$
+    \{ y_1, y_2, \ldots, y_t \} = \{ drink, drink, \ldots, drink \}
+$$
+
+- lots of time dependence here, little volatility
+$$
+    y_t = y_{t-1} = y_{t-1} = \ldots
+$$
+
+- the forecast would thus be $f_{t+h} = drink$ for any $t$ and $h$ (but things changed dramatically after the fortress was built)
+
+
+
+## 1.4. Basic Notation and Objective of the Forecaster
+
+based on information available, that is, conditional on the information set $I_t$, we will produce three types of forecasts
+
+1. **Point forecast**, a single value  $f_{t,h}$.  
+\medskip Example: 2-month-ahead forecast for the short-term interest rate is 3\%.
+\medskip
+
+2. **Interval forecast**, a range of values $(f_{t,h} - k\sigma, f_{t,h} + k\sigma)$ where $\sigma$ is the conditional standard deviation of the random variable $Y_{t+h}$, and $k$ is a constant related to the probability or confidence attached to the interval, which in turn depends on the probability density function of $Y_{t+h}$.  
+\medskip Example: in two months, the short-term interest rate will be between 2\% and 4\% with a 70\% confidence
+\medskip
+
+3. **Density forecast**, a conditional probability density function of $Y_{t+h}$; to get in a probabilistic sense any future realizations of interest rates.  
+\medskip Example: in 2 months, the probability for the short-term interest rate to be below 5\% is 0.85, that is, $P(Y_{t+h} \leq 5\%) = 85\%$.
+
+
+## 1.4. Basic Notation and Objective of the Forecaster
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=11cm]{figures/rivera/fig1_8.png}
+\end{figure}
+
+
+
+## 1.4. Basic Notation and Objective of the Forecaster
+
+- multivariate forecasting problem is more complex but conceptually similar to the univariate forecasting
+
+- for example, suppose we are interested in forecasting jointly interest rates, output, and money demand
+
+- time series data set now contains several time series, $\{y_t\},\{x_t\},\{z_t\}$
+
+- information set contains histories of all time series considered $I_t = \{y_1,\ldots,y_t, x_1,\ldots,x_t, z_1,\ldots,z_t\}$
+
+- objective is to produce the $h$-step-ahead forecast of future values $y_{t+h}, x_{t+h}, z_{t+h}$ for three random variables $Y_{t+h}, X_{t+h}, Z_{t+h}$
+
+
+
+## 1.4. Basic Notation and Objective of the Forecaster
+
+- several steps involved in producing a forecast
+
+- before the search for the model starts, we need to specify 
+    (1) loss function, which drives the optimal forecast, 
+    (2) information set, 
+    (3) forecast horizon
+    
+- econometric model is then constructed; often there are several competing models available
+
+- once these models have been constructed, the forecaster needs to perform
+    (1) in-sample evaluation that assesses the logical consistency of the model with the data
+    (2) out-of-sample evaluation that measures the performance of the model-based forecast
+
+- the best model is used to form a forecast conditional on information set    
