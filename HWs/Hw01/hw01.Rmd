@@ -1,0 +1,73 @@
+---
+title: '**Homework 1**'
+subtitle: |
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: Wednesday, February 6, before the class
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+<!-- ## **Problem 1** -->
+
+<!-- Download \underline{monthly} time series for the close price $p_t$ of stock for some company of your choosing from Google Finance database `GOOG` at Quandl, [https://www.quandl.com/data/GOOG](https://www.quandl.com/data/GOOG), and import it into EViews.   -->
+
+<!-- (a) Create a time series plot for the price.  -->
+<!-- (b) Construct the time series for the return $r_t = 100 \big(\frac{p_t}{p_{t-1}} - 1 \big)$ and create a time series plot for the return.  -->
+<!-- (c) Comment of the behavior of $p_t$ and $r_t$ over time (trends, breaks, volatility).  -->
+<!-- (d) Obtain the descriptive statistics for the return $r_t$: its mean, median, variance, standard deviation, skewness, and kurtosis. Are the returns right (posively) or left (negatively) skewed? Are they leptokurtic (with thick tails) or platykurtic (with thin tails)? -->
+<!-- (e) Examine the histogram and the Jarque-Bera statistic for $r_t$; are the returns normally distributed? -->
+
+
+
+## Problem 1
+
+Download time series for U.S. Real GDP quarter-over-quarter growth rate, series code `A191RL1Q225SBEA` in the FRED database [fred.stlouisfed.org/series/A191RL1Q225SBEA](https://fred.stlouisfed.org/series/A191RL1Q225SBEA). Download \underline{quarterly} time series for inflation adjusted close price of the Standard & Poor's 500 Index, series code `MULTPL/SP500_INFLADJ_MONTH` on Quandl, [www.quandl.com/data/MULTPL/SP500_INFLADJ_MONTH](https://www.quandl.com/data/MULTPL/SP500_INFLADJ_MONTH). Import both time series into EViews into a same quarterly workfile. 
+
+(a) Construct new time series in EVIews for the S\&P 500 index return using 
+$$
+    return_t = 100 \frac{SP500_t - SP500_{t-1}}{SP500_{t-1}} 
+$$
+<!--
+or
+$$
+    return_t = 100 \Delta \log SP500_{t-1}
+$$
+-->
+
+(b) For both real GDP growth rate and the S&P500 returns obtain their descriptive statistics - mean, median, variance, standard deviation, skewness, and kurtosis. Are the two series right (posively) or left (negatively) skewed? Are they leptokurtic (with thick tails) or platykurtic (with thin tails)?
+(c) Recall that the null hypothesis for Jarque-Bera statistic is that time series are normally distributed. Are the S&P500 returns normally distributed? How about real GDP growth rates? 
+(d) Create a scatter plot and calculate the correlation coefficient. Are these two series contemporaneously correlated?
+<!-- (d) Create three scatter plots -->
+
+<!--     - with $return_t$ and $g^{GDP}_t$ -->
+<!--     - with $return_{t-1}$ and $g^{GDP}_t$, so with return for S\&P 500 lagged by one period -->
+<!--     - with $return_{t-2}$ and $g^{GDP}_t$, so with return for S\&P 500 lagged by two periods -->
+
+<!--     Calculate the correlation coefficients for the three cases. Is there any relationship betwen growth rate of GDP and returns for S\&P 500?  -->
+
+
+
+<!--
+Download the U.S. GDP quarterly growth rate from FRED database [http://fred.stlouisfed.org/](http://fred.stlouisfed.org/) and the Standard & Poor's 500 quarterly returns from [https://www,quandl.com](https://www.quandl.com), import them into EViews. For both series, obtain their descriptive statistics - mean, median, variance, standard deviation, skewness, and kurtosis, histograms. Examine the histograms and the Jarque-Bera statistic; are these random variables normally distributed? Create a scatter plot and calculate the correlation coefficient. Are these two series contemporaneously correlated? 
+-->
+
+
+## Problem 2
+
+Use the data for GDP growth rate and S\&P 500 return from Problem 2 to solve Exercise 3 from Chapter 2.
+
+<!--
+The stock market is said to be a leading indicator for GDP growth. Because the stock market prices the expectations of future earnings, a bullish market may predict future economic growth and vice versa. Let $Y_t$ be GDP growth rate and $X_t$ be S\&P 500 Index returns. (both series collected at the quarterly frequency as in the previous exercise). Run OLS for the following models:
+
+a. contemporaneous correlation model: $Y_t = \beta_0 + \beta_1 X_t + u_t$ ()
+b. one-quarter leading indicator model: $Y_t = \beta_0 + \beta_1 X_{t-1} + u_t$
+c. four-quarter leading indicator model: $Y_t = \beta_0 + \beta_1 X_{t-1} + \beta_2 X_{t-2} + \beta_3 X_{t-3} + \beta_4 X_{t-4} + u_t$
+d. leading indicator with GDP inertia: $Y_t = \beta_0 + \beta_1 X_{t-1} + \beta_2 X_{t-2} + \beta_3 X_{t-3} + \beta_4 X_{t-4} + \beta_5 Y_{t-1} + u_t$
+
+For each model, assess the R-squared and the adjusted R-squared. Which model is preferred?
+-->
