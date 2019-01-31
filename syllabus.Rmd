@@ -18,7 +18,7 @@ output: pdf_document
 \end{center} \bigskip
 
 Lectures: MWF 10:00 a.m. - 10:50 a.m., 00226 Holden Hall  
-Website: TBA  
+Website: [ttu.blackboard.com/webapps/blackboard/execute/launcher?type=Course&id=_58926_1  ](https://ttu.blackboard.com/webapps/blackboard/execute/launcher?type=Course&id=_58926_1)  
 
 \medskip
 
