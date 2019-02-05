@@ -32,6 +32,7 @@ Download time series for U.S. Real GDP quarter-over-quarter growth rate, series 
 $$
     return_t = 100 \frac{SP500_t - SP500_{t-1}}{SP500_{t-1}} 
 $$
+Create two time series plots: one for real GDP growth rate and one for S\&P 500 return.
 <!--
 or
 $$
