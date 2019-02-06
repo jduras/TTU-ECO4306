@@ -1,0 +1,65 @@
+---
+title: '**Homework 2**'
+subtitle: |
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: Wednesday, February 13, before the class
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+
+## **Problem 1** 
+
+Solve Exercise 3 from Chapter 3. In addition to the four time series listed there, also import into EViews and analyze in the same way the following data from [www.quandl.com](https://www.quandl.com) and [fred.stlouisfed.org](https://fred.stlouisfed.org)
+
+<!--
+- Real Personal Consumption Expenditures (PCECC96)                                                  FRED/PCECC96  
+- Federal Receipts as Percent of Gross Domestic Product after 1945                                  FRED/FYFRGDA188S 
+- Civilian Labor Force Participation Rate: Women / Civilian Labor Force Participation Rate: Men     FRED/LNS11300001 divided by  FRED/LNS11300002
+- All Employees: Manufacturing  FRED/MANEMP / All Employees: Total Nonfarm Payrolls                 FRED/PAYEMS
+- Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL)
+- Consumer Price Index for All Urban Consumers: All Items Less Food and Energy  (CPILFESL)
+-->
+
+(e) Index of Consumer Sentiment:                                                             [`UMICH/SOC1`](https://www.quandl.com/data/UMICH/SOC1) from Quandl
+(f) All Employees, Total Nonfarm Payrolls:                                                   [`PAYEMS`](https://fred.stlouisfed.org/series/payems) from FRED, keep the monthly frequency, and consider the sample 1950M1-2018M12
+(g) Average Weekly Hours of Production and Nonsupervisory Employees: Manufacturing:          [`AWHMAN`](https://fred.stlouisfed.org/series/AWHMAN) from FRED, keep the monthly frequency, and consider the sample 1950M1-2018M12
+
+For the time series in (a)-(g) which are not stationary, generate either the difference $\Delta y_t$ or log difference $\Delta \log y_t$ to obtain stationary time series. Create time series plots for original and transformed time series.
+
+
+
+## **Problem 2**
+
+Download the quarterly data for U.S. Real Gross Domestic Product, code [GDPC1](https://fred.stlouisfed.org/series/gdpc1), from FRED and import it into EViews. Let $Y_t$ denote the GDP at time $t$ and let $y_t = \log Y_t$.
+
+(a) Generate time series for the quarter-over-quarter annualized growth rate (percentage change) of the real GDP
+$$
+    grGDPQ_t = 400 \times \frac{Y_t - Y_{t-1}}{Y_{t-1}}
+$$
+and for the first log-differences of the real GDP
+$$
+    dlrGDPQ_t = 400 \times (y_t - y_{t-1}) = 400 \times (\log Y_t - \log Y_{t-1})
+$$
+Plot $grGDPQ_t$ and $dlrGDPQ_t$ together in the same time series plot. Do you observe any significant differences?
+
+(b) Generate time series for the year-over-year growth rate (percentage change) of the real GDP
+$$
+    grGDPA_t = 100 \times \frac{Y_t - Y_{t-4}}{Y_{t-4}}
+$$
+and for the first log-differences at lag 4 of the real GDP
+$$
+    dlrGDPA_t = 100 \times (y_t - y_{t-4}) = 100 \times (\log Y_t - \log Y_{t-4})
+$$
+Plot $grGDPA_t$ and $dlrGDPA_t$ together in the same time series plot. Do you observe any significant differences?
+
+(c) Plot correlograms - the ACF and PACF functions - for $dlrGDPQ_t$ and for $dlrGDPA_t$. 
+
+(d) Comment on the ACF and PACF plots, are the autocorrelation coefficients statistically different from zero? 
+
+(e) Which growth rate shows more linear dependence (higher autocorrelation coefficients), $dlrGDPQ_t$ or $dlrGDPA_t$?
