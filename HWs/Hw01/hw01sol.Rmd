@@ -1,0 +1,120 @@
+---
+title: '**Homework 1**'
+subtitle: |
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: Wednesday, February 6, before the class
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+## Problem 1 (50 points)
+
+<!--
+Download time series for U.S. Real GDP quarter-over-quarter growth rate, series code `A191RL1Q225SBEA` in the FRED database [http://fred.stlouisfed.org/](http://fred.stlouisfed.org/). Download the time series for Standard & Poor's 500 Index close price from Yahoo Finance database `YAHOO` at Quandl, [https://www,quandl.com/data/YAHOO](https://www,quandl.com/data/YAHOO), series code `INDEX_GSPC`. Import both time series into EViews into a same quarterly workfile. 
+
+(a) Construct new time series in EViews for the S\&P 500 index return using
+$$
+    return_t = 100 \times \frac{index_t - index_{t-1}}{index_{t-1}} 
+$$
+(b) For both series, obtain their descriptive statistics - mean, median, variance, standard deviation, skewness, and kurtosis, histograms. 
+(c) Examine the histograms and the Jarque-Bera statistic; are these random variables normally distributed? 
+(d) Create a scatter plot and calculate the correlation coefficient. Are these two series contemporaneously correlated? 
+
+
+*Solution*
+
+-->
+(a) (10 points) Figure below shows the time series plots for the two time series for the sample 1947Q2-2018Q3.
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=12.5cm]{figures/hw01q02_fig01_ts_gGDP.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=12.5cm]{figures/hw01q02_fig02_ts_SP500.png}
+\end{center}
+
+Figure below shows the time series plot for the constructed series for S&P500 return. 
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=12.5cm]{figures/hw01q02_fig03_ts_rSP500.png}
+\end{center}
+
+
+(b) (20 points) Figure below shows the descriptive statistics for the two time series for the sample 1947Q2-2018Q3.
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=12.5cm]{figures/hw01q02_fig04_hist_gGDP.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=12.5cm]{figures/hw01q02_fig05_hist_rSP500.png}
+\end{center}
+
+(c) (10 points) The high Jarque-Bera statistics and the associated p-value which are essentially zero imply that these two time series are not normally distributed. 
+
+(d) (10 points) The scatter plot below suggests that there is only very weak contemporaneous correlation in the 1947Q2-2018Q3 sample, which is confirmed by calculating the correlation coefficient, $corr(gRGDP_t, rSP500_t) = 0.150$.
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw01q02_fig06_gGDP_rSP500_scatter.png}
+\end{center}
+
+
+
+## Problem 2 (50 points)
+
+<!--
+Use the data for GDP growth rate and S\&P 500 return from Problem 2 to solve Exercise 3 from Chapter 2.
+
+The stock market is said to be a leading indicator for GDP growth. Because the stock market prices the expectations of future earnings, a bullish market may predict future economic growth and vice versa. Let $Y_t$ be GDP growth rate and $X_t$ be S\&P 500 Index returns. (both series collected at the quarterly frequency as in the previous exercise). Run OLS for the following models:
+
+a. contemporaneous correlation model: $Y_t = \beta_0 + \beta_1 X_t + u_t$ ()
+b. one-quarter leading indicator model: $Y_t = \beta_0 + \beta_1 X_{t-1} + u_t$
+c. four-quarter leading indicator model: $Y_t = \beta_0 + \beta_1 X_{t-1} + \beta_2 X_{t-2} + \beta_3 X_{t-3} + \beta_4 X_{t-4} + u_t$
+d. leading indicator with GDP inertia: $Y_t = \beta_0 + \beta_1 X_{t-1} + \beta_2 X_{t-2} + \beta_3 X_{t-3} + \beta_4 X_{t-4} + \beta_5 Y_{t-1} + u_t$
+
+For each model, assess the R-squared and the adjusted R-squared. Which model is preferred?
+
+*Solution*
+-->
+
+Below are the results for the four models. Comparing their adjusted $R^2$, we can see that model contemporaneous correlation in (a) explains only a tiny fraction of the overall variation in the GDP growth rate, adjusted $R^2$ is 0.022. Using lagged terms instead increases the adjusted $R^2$ to 0.081, 0.196 and 0.239 in parts (b), (c), (d) respectively.
+
+(a) (12.5 points) contemporaneous correlation model:  
+$gRGDP_t = 3.132 + 0.081 rSP500_t + \varepsilon_t$
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw01q03_eq01.png}
+\end{center}
+
+\newpage 
+
+(b) (12.5 points) one-quarter leading indicator model:  
+$gRGDP_t = 3.058 + 0.153 rSP500_{t-1} + \varepsilon_t$
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw01q03_eq02.png}
+\end{center}
+
+(c) (12.5 points) four-quarter leading indicator model:  
+$gRGDP_t = 2.694 + 0.138 rSP500_{t-1} + 0.148 rSP500_{t-2} + 0.061 rSP500_{t-3} + 0.062 rSP500_{t-4} + \varepsilon_t$
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw01q03_eq03.png}
+\end{center}
+
+(d) (12.5 points) four-quarter indicator model with GDP inertia:  
+$gRGDP_t = 2.068 + 0.122 rSP500_{t-1} + 0.119 rSP500_{t-2} + 0.027 rSP500_{t-3} + 0.046 rSP500_{t-4} + 0.230 gRGDP_{t-1} + \varepsilon_t$
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw01q03_eq04.png}
+\end{center}
+
+\medskip
+
+
+<!--
+The stock market is said to be a leading indicator for GDP growth. Because the stock market prices the expectations of future earnings, a bullish market may predict future economic growth and vice versa. Let $Y_t$ be GDP growth rate and $X_t$ be S\&P 500 Index returns. (both series collected at the quarterly frequency as in the previous exercise). Run OLS for the following models:
+
+a. contemporaneous correlation model: $Y_t = \beta_0 + \beta_1 X_t + u_t$ ()
+b. one-quarter leading indicator model: $Y_t = \beta_0 + \beta_1 X_{t-1} + u_t$
+c. four-quarter leading indicator model: $Y_t = \beta_0 + \beta_1 X_{t-1} + \beta_2 X_{t-2} + \beta_3 X_{t-3} + \beta_4 X_{t-4} + u_t$
+d. leading indicator with GDP inertia: $Y_t = \beta_0 + \beta_1 X_{t-1} + \beta_2 X_{t-2} + \beta_3 X_{t-3} + \beta_4 X_{t-4} + \beta_5 Y_{t-1} + u_t$
+
+For each model, assess the R-squared and the adjusted R-squared. Which model is preferred?
+-->
