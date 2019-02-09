@@ -257,9 +257,9 @@ $$
 
 - import data from Microsoft Excel file [**Figure03_fig01_fig7_DJI.xls**](http://myweb.ttu.edu/jduras/files/teaching/eco4306/Figure03_fig01_fig7_DJI.xls) into EViews: click on **File**, select **Import**, then **Import from file**, and **Finish**
 
-- construct first difference by chosing **Object** then **Generate Series** and entering **d_DJ = d(DJ)**
+- construct first difference by choosing **Object** then **Generate Series** and entering **d_DJ = d(DJ)**
 
-- construct log transformed data by chosing **Object** then **Generate Series** and entering **log_DJ = log(DJ)**
+- construct log transformed data by hosing **Object** then **Generate Series** and entering **log_DJ = log(DJ)**
 
 - construct first difference of log transformed data by chosing **Object** then **Generate Series** and entering **d_log_DJ = dlog(DJ)**
 
@@ -269,7 +269,7 @@ $$
 
 - to create a plot with all four time series, first select **Object** then **New Object** and **Group**, enter their names **DJ d_DJ log_DJ d_log_DJ**
 
-- them, afer the spreadsheet with group time series opens select **View** then **Graph** and in **Details** section change **Multiple series** option into **Multiple graphs**
+- them, after the spreadsheet with group time series opens select **View** then **Graph** and in **Details** section change **Multiple series** option into **Multiple graphs**
 
 \begin{figure}[h]
     \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8.5cm]{figures/rivera/fig3_7.png}
@@ -312,7 +312,7 @@ $$
 ## 3.2.2 Useful Transformations of Nonstationary Processes
 
 
-- to obtain histogram and descriptive statstics for Dow Jones returns, double click **D_log_DJ** to open it, select **View** then **Descriptive Statistics & Tests** and then **Histogram and Stats**
+- to obtain histogram and descriptive statistics for Dow Jones returns, double click **D_log_DJ** to open it, select **View** then **Descriptive Statistics & Tests** and then **Histogram and Stats**
 
 \begin{figure}[h]
     \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{../Codes/lec05/fig_d_log_dj_hist.png}
@@ -360,7 +360,7 @@ provides information about the "thickness" of the tails of the distribution is
 
 - consider stochastic process $\{Y_t\} = \{Y_1,Y_2,\ldots,Y_T\}$ and two of its random variables $k$ periods apart, $Y_t$ and $Y_{t-k}$
 
-- calculate **autcorrelation coefficient or order $k$**, the measure of linear association of $Y_t$ with $Y_{t-k}$
+- calculate **autocorrelation coefficient or order $k$**, the measure of linear association of $Y_t$ with $Y_{t-k}$
 $$
     \rho_{Y_t,Y_{t-k}} = \frac{cov(Y_t, Y_{t-k})}{\sqrt{var(Y_t)} \sqrt{var(Y_{t-k})}}
 $$
