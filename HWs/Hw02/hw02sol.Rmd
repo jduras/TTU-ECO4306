@@ -1,0 +1,208 @@
+---
+title: '**Homework 2**'
+subtitle: |
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: Wednesday, February 13, before the class
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+
+## **Problem 1** (70 points)
+
+<!--
+
+Solve Exercise 3 from Chapter 3. In addition to the four time series listed there, also import into EViews and analyze in the same way the following data from [www.quandl.com](https://www.quandl.com)
+
+(e) Index of Consumer Sentiment:                                                             code `UMICH/SOC1`, change the frequency to quarterly, and consider the sample 1952q1-2016q4
+(f) All Employees, Total Nonfarm Payrolls:                                                   code `FRED/PAYEMS`, keep the monthly frequency, and consider the sample 1950m1-2017m1
+(g) Average Weekly Hours of Production and Nonsupervisory Employees: Manufacturing:          code `FRED/AWHMAN`, keep the monthly frequency, and consider the sample 1950m1-2017m1
+
+For the time series in (a)-(g) which are not stationary, generate in EViews either the difference $\Delta y_t$ or log difference $\Delta \log y_t$ to obtain stationary time series. Create time series plot for the transformed time series.
+
+*Solution*
+-->
+
+
+ Visit again the website of the Federal Reserve Bank in St. Louis (http://research.stlouisfed.org) and download the following data:
+
+
+(a) (10 points) U.S. real GDP., time series [`GDPC1`](https://fred.stlouisfed.org/series/GDPC1):  
+
+- definition: real gross domestic product is the inflation adjusted value of the goods and services produced by labor and property located in the United States
+- units: billions of chained 2009 dollars, seasonally adjusted annual rate
+- frequency: quarterly
+    
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figA1_gdp.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figA2_gdp.png}
+\end{center}
+
+Time series is not weakly stationary, because it is growing over time, so mean and variance can not be constant. To obtain weakly stationary data we transform the time series by taking log and then calculating the first differences. The resulting series approximates the growth rate (percentage change) and fluctuates around mean with roughly same volatility over the sample period.
+
+
+\newpage
+
+(b) (10 points) The exchange rate of the Japanese yen against the U.S. dollar., time series [`DEXJPUS`](https://fred.stlouisfed.org/series/DEXJPUS):
+
+- definition: Noon buying rates in New York City for cable transfers payable in foreign currencies.
+- units: Japanese yen to one U.S. dollar, not seasonally adjusted
+- frequency: daily
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figB1_jpyusd.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figB2_jpyusd.png}
+\end{center}
+
+Time series might be weakly stationary, if we only consider the period since 1990, but before that it was gradually declining in 1970s and 1980s. To obtain weakly stationary data we transform the time series by taking log and then calculating the first differences. The resulting series approximates the growth rate (percentage change) and fluctuates around its mean, though the volatility appears to be changing, with calmer periods interrupted by period of larger volatility.
+
+
+
+(c) (10 points) The 10-year U.S. Treasury constant maturity yield., time series [`DGS10`](https://fred.stlouisfed.org/series/DGS10):
+
+- definition: 
+- units: percent, not seasonally adjusted
+- frequency: daily
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figC1_tb10yr.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figC2_tb10yr.png}
+\end{center}
+
+Time series was gradually growing in 1960s and 1970s, but was since then gradually declining, so it is hard to tell whether it is weakly stationary or not.
+
+
+\newpage
+
+(d) (10 points) The U.S. unemployment rate., time series [`UNRATE`](https://fred.stlouisfed.org/series/UNRATE):
+
+- definition: Number of unemployed as a percentage of the labor force. Labor force data are restricted to people 16 years of age and older, who do not reside in institutions (e.g., penal and mental facilities, homes for the aged), and who are not on active duty in the Armed Forces.
+- units: percent, seasonally adjusted
+- frequency: monthly
+    
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figD1_u3rate.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figD2_u3rate.png}
+\end{center}
+
+Time series might be weakly stationary, since it is not growing and instead it fluctuates around its mean, but it shows a lot of persistence. The time series for first differences also fluctuates around its mean, with roughly constant volatility, and with much smaller persistence.
+
+
+
+(e) (10 points) Index of Consumer Sentiment:, time series [`UMICH/SOC1`](https://www.quandl.com/data/UMICH/SOC1)
+
+- definition: 
+- units: index, 1966Q1=100, not seasonally adjusted 
+- frequency: 
+    
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figE1_csent.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figE2_csent.png}
+\end{center}
+
+Time series appears to be weakly stationary, since it fluctuates around its mean, but this time series also shows high persistence. The time series for first differences also fluctuates around its mean, with roughly constant volatility, and with much smaller persistence.
+
+
+\newpage
+
+(f) (10 points) All Employees, Total Nonfarm Payrolls, time series [`FRED/PAYEMS`](https://www.quandl.com/data/FRED/PAYEMS)
+
+- definition: Total Nonfarm Payroll, is a measure of the number of U.S. workers in the economy that excludes proprietors, private household employees, unpaid volunteers, farm employees, and the unincorporated self-employed. This measure accounts for approximately 80 percent of the workers who contribute to Gross Domestic Product (GDP).
+- units: thousands of persons, seasonally adjusted
+- frequency:  monthly 
+     
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figF1_payems.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figF2_payems.png}
+\end{center}
+
+Time series is not weakly stationary, because it is growing over time, so mean and variance can not be constant. To obtain weakly stationary data we transform the time series by taking log and then calculating the first differences. The resulting series approximates the growth rate (percentage change) and fluctuates around mean with roughly same volatility over the sample period.
+
+
+
+(g) (10 points) Average Weekly Hours of Production and Nonsupervisory Employees: Manufacturing:, time series [`FRED/AWHMAN`](https://www.quandl.com/data/FRED/AWHMAN) 
+
+- definition: Average weekly hours are the total weekly hours divided by the employees paid for those hours. Nonsupervisory employees include individuals who are not above the working-supervisor level. 
+- units: hours, seasonally adjusted
+- frequency:  monthly 
+    
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figG1_awhman.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q01_figG2_awhman.png}
+\end{center}
+
+Time series appears to be weakly stationary, since it fluctuates around its mean. The time series for first differences also fluctuates around its mean.
+
+
+
+## **Problem 2** (30 points)
+
+<!-- 
+
+Download the quarterly data for U.S. Real Gross Domestic Product, code `FRED/GDPC96` from [www.quandl.com](https://www.quandl.com), and import it into EViews. Let $Y_t$ denote the GDP at time $t$ and let $y_t = \log Y_t$.
+
+(a) Generate time series for the quarter-over-quarter growth rate (percentage change) of the real GDP
+$$
+    grGDPQ_t = 100 \times \frac{Y_t - Y_{t-1}}{Y_{t-1}}
+$$
+and for the first log-differences of the real GDP
+$$
+    dlrGDPQ_t = 100 \times (y_t - y_{t-1}) = 100 \times (\log Y_t - \log Y_{t-1})
+$$
+Plot $grGDPQ_t$ and $dlrGDPQ_t$ together in the same time series plot. Do you observe any significant differences?
+
+(b) Generate time series for the year-over-year growth rate (percentage change) of the real GDP
+$$
+    grGDPA_t = 100 \times \frac{Y_t - Y_{t-4}}{Y_{t-4}}
+$$
+and for the first log-differences at lag 4 of the real GDP
+$$
+    dlrGDPA_t = 100 \times (y_t - y_{t-4}) = 100 \times (\log Y_t - \log Y_{t-4})
+$$
+Plot $grGDPA_t$ and $dlrGDPA_t$ together in the same time series plot. Do you observe any significant differences?
+
+(c) Plot correlograms - the ACF and PACF functions - for $dlrGDPQ_t$ and for $dlrGDPA_t$. Comment on the ACF and PACF plots, are the autocorrelation coefficients statistically different from zero? Which growth rate shows more linear dependence (higher autocorrelation coefficients), $dlrGDPQ_t$ or $dlrGDPA_t$?
+
+*Solution*
+
+-->
+
+
+(a) (10 points) There is almost no noticeable difference between the the quarter-over-quarter growth rate (percentage change) of the real GDP
+$$
+    grGDPQ_t = 100 \times \frac{Y_t - Y_{t-1}}{Y_{t-1}}
+$$
+and the first log-differences of the real GDP
+$$
+    dlrGDPQ_t = 100 \times (y_t - y_{t-1}) = 100 \times (\log Y_t - \log Y_{t-1})
+$$
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q02_fig1_dlrgdpq_ts.png}
+\end{center}
+
+(b) (10 points) There is almost no noticeable difference between the year-over-year growth rate (percentage change) of the real GDP
+$$
+    grGDPA_t = 100 \times \frac{Y_t - Y_{t-4}}{Y_{t-4}}
+$$
+and the first log-differences at lag 4 of the real GDP
+$$
+    dlrGDPA_t = 100 \times (y_t - y_{t-4}) = 100 \times (\log Y_t - \log Y_{t-4})
+$$
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q02_fig2_dlrgdpa_ts.png}
+\end{center}
+
+(c) (10 points) The ACF and PACF for $dlrGDPA_t$ show that there is more linear dependence (higher autocorrelation coefficients) than in $dlrGDPQ_t$. The AC coefficients are statistically different from zero for first two lags in case of $dlrGDPQ_t$ and for first three lags in case of $dlrGDPA_t$.
+
+    
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q02_fig3_dlrgdpq_corr.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/hw02q02_fig4_dlrgdpa_corr.png}
+\end{center}
