@@ -1,0 +1,680 @@
+---
+title: "Eco 4306 Economic and Business Forecasting"
+subtitle: | 
+            | Chapter 6: Forecasting with Moving Average (MA) Processes
+#            | Lecture 7
+author: 
+date: 
+fontsize: 8pt
+output: 
+  beamer_presentation:
+#    incremental: true
+    highlight: tango
+    fonttheme: professionalfonts
+    includes:
+      in_header: lecturesfmt.tex
+---
+
+
+## Outline
+
+- we now start  building time series models
+
+- first, we introduce **white noise process**, characterized by absence of linear time dependence
+
+- after that we will develop a **moving average model** for processes which do exhibit some linear time dependence
+
+<!--
+- after that we will develop two classes of models: a **moving average model** and an **autoregressive model** for processes which do exhibit some linear time dependence
+
+- Wold decomposition: justifies the study of moving average (MA) and autoregressive (AR) time series models
+
+- we will discuss the statistical properties of MA processes and their forecasts
+-->
+
+
+
+
+
+## 6.1 A Model with No Dependence: White Noise
+
+- a stationary stochastic process $\{\varepsilon_t\}$ is called **white noise process** if $\rho_k=0$ for $k \geq 1$, and $r_k=0$ for $k \geq 1$, that is if autocorrelation and partial autocorrelation functions are zero
+
+- no linear dependence, autocorrelations are zero - no link between past and present observations, no link between present and future observations
+
+- no dependence to exploit so we cannot predict future realizations of the process - $\varepsilon_t$ is unpredictable shock, residual in our time series models
+
+
+
+## 6.1 A Model with No Dependence: White Noise
+
+- consider stochastic process $Y_t = 1 + \varepsilon_t$ where $\varepsilon_t \sim N(0,4)$ 
+
+- theoretical unconditional mean and variance of $\{Y_t\}$ are $E(Y_t) = E(1+\varepsilon_t) = 1$ and $var(Y_t) = var(1+\varepsilon_t) = 4$
+
+- first two population moments are thus time invariant
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/rivera/fig6_1.png}
+\end{figure}
+
+
+
+## 6.1 A Model with No Dependence: White Noise
+
+- time series $\{y_t\}$ looks very ragged
+
+- histogram for $\{y_t\}$ its has the expected bell shape corresponding to a normal distribution
+    
+- skewness is approximately zero, kurtosis approximately 3, Jarque-Bera test indicates that normality is not rejected ($p=0.351$)
+
+- first two sample moments are very close to the population moments - sample mean is 0.96, sample standard deviation is 2.03
+
+- time series plot shows that realizations bounce around a mean value of 1 and volatility does not appear to change significantly 
+
+- AC function  and PAC function  at all lags are not significantly different from 0 at 5\% level
+
+- time series $\{y_t\}$ is thus a white noise process
+
+
+
+## 6.1 A Model with No Dependence: White Noise
+
+<!--
+**if wishes were horses, then beggars would ride**
+-->
+
+- in business and economics some data behave very similarly to a white noise process
+
+- white noise processes are especially common among financial series
+
+- this is the reason why these data are so difficult to predict - they do not exhibit any temporal linear dependence that could be consistently exploited
+
+- for example: returns for individual stocks and for stock market indices have correlograms that resemble a white noise process
+
+<!--
+- for example: returns for Dow Jones (DJ) Index, Standard & Poor's (SP) 500 Index, or individual stocks have correlograms that resemble a white noise process
+-->
+
+
+
+## 6.1 A Model with No Dependence: White Noise
+
+- returns, Microsoft and DJ Index, 1986M4-2004M7, [**Figure06_02_MSFT_DJ.xls**](http://myweb.ttu.edu/jduras/files/teaching/eco4306/Figure06_02_MSFT_DJ.xls) 
+
+- all lags of AC and PAC functions are not significantly different from 0 at 5\% level
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/rivera/fig6_2.png}
+\end{figure}
+
+
+
+## 6.3 Forecasting with Moving Average Models
+
+- a **moving average process of order $q$**, referred to as MA$(q)$, has the form
+$$
+    Y_t = \mu + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2} + \ldots + \theta_q \varepsilon_{t-q}
+$$
+where $\varepsilon_t$ is a zero-mean white noise process
+ 
+- order of the model is given by the largest lag, not by the number of lag variables in the right-hand side
+
+- for instance
+$$
+    Y_t = \mu + \varepsilon_t + \theta_3 \varepsilon_{t-3}
+$$
+is an MA(3) because the largest lag is 3 although there is only one lagged variable
+
+<!--
+- note that $\varepsilon_t ,\varepsilon_{t-1} ,\varepsilon_{t-2}, \ldots ,\varepsilon_{t-q}$ are not directly observable, which will make estimating the model slightly more complicated
+-->
+
+
+<!--
+## 6.3 Forecasting with Moving Average Models
+
+- moving average are used to describe \underline{short-term} dynamics of a covariance stationary time series
+
+- unlike in economics, meaning of short, medium, and long term depends on the frequency of the time series that we are analyzing 
+
+- with daily time series, a short-term forecast could be a 1-day-ahead forecast
+
+- with monthly time series, a 1-month-ahead forecast is also a short-term forecast
+
+- however, 1-month-ahead forecast based on a daily time series may be considered a medium/long term forecast - with daily information, it is a 30-day-ahead forecast
+
+- as we'll see, depending on the memory of the process, a 30-day-ahead forecast may well be the unconditional mean of the process for which no time series model is needed
+-->
+
+
+## 6.3 Forecasting with Moving Average Models
+
+- we will next look at the statistical properties of MA models
+
+- our ultimate objective is constructing the optimal forecast
+
+- we will analyze the lowest order process, MA$(1)$, generalization to MA$(q)$ is straightforward
+
+- three questions we want to answer
+    1. What does a time series of an MA process look like?
+    2. How do the AC and PAC functions for MA process look like?
+    3. What is the optimal forecast for an MA process?
+
+
+
+## 6.3.1 MA(1) Process
+
+- consider MA(1) process $Y_t = \mu + \varepsilon_t + \theta \varepsilon_{t-1}$
+
+- four simulations, each 200 observations of MA(1), with different values of $\theta \in\{ 0.05, 0.5, 0.95, 2.0 \}$, but with same $\mu=2$, and $\varepsilon_t \sim N(0,0.25)$
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/rivera/fig6_3.png}
+\end{figure}
+
+
+
+## 6.3.1 MA(1) Process
+
+- four time series seem to be weakly stationary
+
+- unconditional population mean is time invariant
+$$
+    E(Y_t) = E(\mu + \varepsilon_t + \theta \varepsilon_{t-1}) = \mu
+$$
+
+- unconditional variance is also time invariant
+$$
+    var(Y_t) = E(Y_t-E(Y_t))^2 = E(\varepsilon_t + \theta \varepsilon_{t-1})^2 = E(\varepsilon_t^2 + 2 \theta \varepsilon_t \varepsilon_{t-1} + \theta^2  \varepsilon_{t-1}^2) = (1+\theta^2) \sigma^2_\varepsilon
+$$
+and it is increasing with $\theta$
+
+- we still need to verify that the autocorrelation function does not depend on time to claim that the process is covariance stationary
+
+
+
+## 6.3.1 MA(1) Process
+
+- only $\hat \rho_1$ in the sample AC function  is significantly different from zero
+- $\hat \rho_1$ is proportional to $\theta$ for $|\theta| < 1$ and its sign is the same as the sign of $\theta$
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/rivera/fig6_4.png}
+\end{figure}
+
+
+
+## 6.3.1 MA(1) Process
+
+- population autocovariance of order 1
+$$
+    \gamma_1 = E[(Y_t-\mu)(Y_{t-1}-\mu)] = E[(\varepsilon_t + \theta \varepsilon_{t-1})(\varepsilon_{t-1} + \theta \varepsilon_{t-2})] = \theta \sigma_\varepsilon^2
+$$
+- population autocorrelation of order 1
+$$
+    \rho_1 = \frac{\gamma_1}{\gamma_0} = \frac{\theta \sigma_\varepsilon^2}{(1+\theta^2)\sigma_\varepsilon^2} = \frac{\theta}{1+\theta^2}
+$$
+- population autocovariance of order $k>1$
+$$
+    \gamma_k = E[(Y_t-\mu)(Y_{t-k}-\mu)] = E[(\varepsilon_t + \theta \varepsilon_{t-1})(\varepsilon_{t-k} + \theta \varepsilon_{t-k-1})] = 0
+$$
+thus for population autocorrelation of order $k>1$ we have 
+$$
+    \rho_k = \frac{\gamma_k}{\gamma_0} = 0
+$$
+
+- so autocorrelation function really does not depend on time, and thus MA$(1)$ is covariance stationary process
+
+
+
+## 6.3.1 MA(1) Process
+
+- note that AC function  and PAC function  for the MA(1) processes with $\theta = 0.5$ and $\theta = 2$ are identical
+
+- this is due to the fact that for the MA(1) with parameter $\hat \theta=\frac{1}{\theta}$ we get
+$$
+    \rho_1 = \frac{\hat \theta}{1+\hat \theta^2} = \frac{\frac{1}{\theta}}{1+\frac{1}{\theta^2}} = \frac{\theta}{\theta^2+1} = \frac{\theta}{1+\theta^2}
+$$
+
+- an MA(1) process is called **invertible** if $|\theta| < 1$
+
+- if an MA process is invertible, we can always find an autoregressive representation in which the present $Y_t$ is a function of the past $Y_{t-1}, Y_{t-2}, Y_{t-3}, \ldots$
+
+
+
+## 6.3.1 MA(1) Process
+
+- we will next analyze and forecast the percentage change in 5-Year Constant Maturity Yield on Treasury Securities, using April 1953 to April 2008 sample
+
+- data available at FRED [**https://fred.stlouisfed.org/graph/?g=mXGl**](https://fred.stlouisfed.org/graph/?g=mXGl) and [**Figure06_05_Table6_1_treasury.xls**](http://myweb.ttu.edu/jduras/files/teaching/eco4306/Figure06_05_Table6_1_treasury.xls) 
+
+- U.S. Treasury securities are considered to be the least risky assets
+
+- they constitute an asset of reference to monitor the level of risk of other fixed-income securities such as grade bonds and certificates of deposit
+
+- risk spread - difference between the yield of the fixed-income security and the yield of a corresponding Treasury security with the same maturity
+
+
+
+## 6.3.1 MA(1) Process
+
+<!--
+- we will use transformed $\Delta \log y_t = \log y_t - \log y_{t-1}$
+-->
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/rivera/fig6_5a.png}
+\end{figure}
+
+
+
+## 6.3.1 MA(1) Process
+
+- AC function and PAC function  similar to those for MA(1)
+
+- AC function has only one positive spike at $\hat \rho_1$, remaining autocorrelations are not significantly different from zero
+
+- PAC function alternating signs, decreasing toward zero
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/rivera/fig6_5b.png}
+\end{figure}
+
+
+
+## 6.3.1 MA(1) Process
+
+- recall: under quadratic loss function the optimal point forecast is conditional mean, $f_{t,h} = \mu_{t+h|t} = E(Y_{t+h}|I_t)$
+
+- we next analyze this optimal forecast under quadratic loss function for $h=1,2,\ldots$ 
+
+- we will see that forecasting with an MA(1) is rather limited by the very short memory of the process - for $h > 1$ the optimal forecast is identical to the unconditional mean of the process
+
+
+## 6.3.1 MA(1) Process
+
+- for MA(1) model and forecasting horizon $h=1$ we have  
+
+i. optimal point forecast 
+$$
+    f_{t,1} = \mu_{t+1|t} = E(Y_{t+1}|I_t) = E(\mu + \varepsilon_{t+1} + \theta \varepsilon_t) = \mu + \theta \varepsilon_t
+$$
+
+ii. 1-period-ahead forecast error 
+$$
+    e_{t,1} = Y_{t+1} - f_{t,1} = \mu + \varepsilon_{t+1} + \theta \varepsilon_t - \mu - \theta \varepsilon_t = \varepsilon_{t+1}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+1|t}^2 = var(e_{t+1}) = \sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+1}|I_t) \sim N(\mu + \theta \varepsilon_t, \sigma_\varepsilon^2)
+$$
+ 
+v. using the density forecast we can construct interval forecasts - since for $Z \sim N(0,1)$ we have $P(-1.96 \leq Z \leq 1.96) = 0.95$, the 95\% interval forecast for $Y_{t+1}$ is
+$$
+    \mu_{t+1|t} \pm 1.96 \sigma_{t+1|t} = (\mu_{t+1|t} - 1.96 \sigma_{t+1|t}, \mu_{t+1|t} + 1.96 \sigma_{t+1|t})
+$$
+
+
+
+## 6.3.1 MA(1) Process
+
+- for MA(1) model and forecasting horizon $h=2$ we have  
+
+i. optimal point forecast 
+$$
+    f_{t,2} = \mu_{t+2|t} = E(Y_{t+2}|I_t) = E(\mu + \varepsilon_{t+2} + \theta \varepsilon_{t+1}) = \mu
+$$
+
+ii. 2-period-ahead forecast error 
+$$
+    e_{t,2} = Y_{t+2} - f_{t,2} = \mu + \varepsilon_{t+2} + \theta \varepsilon_{t+1} - \mu = \varepsilon_{t+2} + \theta \varepsilon_{t+1}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+2|t}^2 = var(e_{t+2}) = (1+\theta^2)\sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+2}|I_t) \sim N(\mu, (1+\theta^2)\sigma_\varepsilon^2)
+$$
+
+
+
+## 6.3.1 MA(1) Process
+
+- for MA(1) model and forecasting horizon $h=s$ we have  
+
+i. optimal point forecast 
+$$
+    f_{t,s} = \mu_{t+s|t} = E(Y_{t+s}|I_t) = \mu
+$$
+
+ii. $s$-period-ahead forecast error 
+$$
+    e_{t,s} = Y_{t+s} - f_{t,s} = \mu + \varepsilon_{t+s} + \theta \varepsilon_{t+s-1} - \mu = \varepsilon_{t+s} + \theta \varepsilon_{t+s-1}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+s|t}^2 = var(e_{t+s}) = (1+\theta^2)\sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+s}|I_t) \sim N(\mu, (1+\theta^2)\sigma_\varepsilon^2)
+$$
+
+
+<!--
+## 6.3.1 MA(1) Process
+
+- forecasting with an MA(1) is thus limited by the very short memory of the process - for $h > 1$ the optimal forecast is identical to the unconditional mean of the process
+-->
+
+
+## 6.3.1 MA(1) Process
+
+Forecasting 5-year Constant Maturity Yield on Treasury Securities:
+
+- AC and PAC suggest that the Percentage Change in 5-year Constant Maturity Yield on Treasury Securities follows an MA(1) process
+
+- we will use 1953M5-2007M11 as estimation sample and 2007M12-2008M4 as prediction sample 
+
+- we will thus construct forecast for $h=1,2,\ldots,5$ so 1-step to 5-step ahead forecasts
+
+- to estimate $\theta$ in EViews choose **Object** $\rightarrow$ **New Object** $\rightarrow$ **Equation**, in equation specification write
+**dy c MA(1)**, and in sample 1953M5-2007M11
+
+- afterwards to create a multistep forecast in EViews open the equation and choose **Proc** $\rightarrow$ **Forecast**, enter name dyf_se for standard deviation $\sigma_{t+h|t}$ into "S.E. (optional)", change forecast sample to 2007M12-2008M4, and select "Dynamic forecast" method in the forecast window
+ 
+- to construct the lower and the upper bounds of the 95% confidence interval $(\mu_{t+h|t} - 1.96\sigma_{t+h|t}, \mu_{t+h|t} + 1.96\sigma_{t+h|t})$ choose **Object** $\rightarrow$ **Generate series** set sample to 2007M12-2008M4 and enter first **dyf_lb = dyf - 1.96 dyf_se** and then the second time **dyf_ub = dyf + 1.96 dyf_se**
+
+
+
+## 6.3.1 MA(1) Process
+
+Forecasting 5-year Constant Maturity Yield on Treasury Securities:
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/rivera/fig6_6.png}
+\end{figure}
+
+
+
+## 6.3.2 MA(2) Process
+
+- consider now an MA(2) process $Y_t = \mu + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2}$
+
+- two simulations, each 200 observations of MA(2), with $\theta_1 = 1.70, \theta_2 = 0.72$ and with $\theta_1 = -1, \theta_2 = 0.25$, in addition to $\mu=2$ and $\varepsilon_t \sim N(0,0.25)$
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=10cm]{figures/rivera/fig6_7.png}
+\end{figure}
+
+- unconditional population mean is time invariant
+$$
+    E(Y_t) = E(\mu + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2}) = \mu
+$$
+
+- unconditional variance is also time invariant
+$$
+    var(Y_t) = E(Y_t-E(Y_t))^2 = E(\varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2})^2 = (1+\theta_1^2+\theta_2^2) \sigma^2_\varepsilon
+$$
+
+
+
+## 6.3.2 MA(2) Process
+
+- first two components in sample AC function are different from zero $\hat \rho_1 \neq 0$, $\hat \rho_2 \neq 0$, remaining autocorrelations are equal to zero, $\hat \rho_k = 0$ for $k > 2$
+
+- sample PAC function decreases toward zero
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, height=7cm]{figures/rivera/fig6_8.png}
+\end{figure}
+
+
+
+## 6.3.2 MA(2) Process
+
+- population autocovariance of order 1
+$$
+    \gamma_1 = E[(Y_t-\mu)(Y_{t-1}-\mu)] = (\theta_1 + \theta_1 \theta_2) \sigma_\varepsilon^2
+% = E[(\varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2})(\varepsilon_{t-1} + \theta_1 \varepsilon_{t-2} + \theta_2 \varepsilon_{t-3})]
+$$
+thus for population autocorrelation of order 1 we have
+$$
+    \rho_1 = \frac{\gamma_1}{\gamma_0} = \frac{\theta_1 + \theta_1 \theta_2}{1+\theta_1^2+\theta_2^2}
+% \frac{(\theta_1 + \theta_1 \theta_2) \sigma_\varepsilon^2}{(1+\theta_1^2+\theta_2^2)\sigma_\varepsilon^2}
+$$
+- population autocovariance of order $k=2$
+$$
+    \gamma_2 = E[(Y_t-\mu)(Y_{t-2}-\mu)] = \theta_2 \sigma_\varepsilon^2
+% = E[(\varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2})(\varepsilon_{t-2} + \theta_1 \varepsilon_{t-3} + \theta_1 \varepsilon_{t-4})]
+$$
+thus for population autocorrelation of order $k=2$ we have 
+$$
+    \rho_2 = \frac{\gamma_2}{\gamma_0} = \frac{ \theta_2 }{1+\theta_1^2+\theta_2^2}
+% = \frac{ \theta_2 \sigma_\varepsilon^2}{(1+\theta_1^2+\theta_2^2)\sigma_\varepsilon^2}
+$$
+- autocorrelations of higher order are all equal to zero
+$$
+    \gamma_k = E[(Y_t-\mu)(Y_{t-k}-\mu)] = 0
+% = E[(\varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2})(\varepsilon_{t-k} + \theta_1 \varepsilon_{t-k-1} + \theta_2 \varepsilon_{t-k-2})]
+$$
+thus for population autocorrelation of order $k>2$ we have 
+$$
+    \rho_k = \frac{\gamma_k}{\gamma_0} = 0
+$$
+
+- since autocorrelation function does not depend on time, MA$(2)$ is covariance stationary process
+
+
+
+## 6.3.2 MA(2) Process
+
+- for MA(2) model and forecasting horizon $h=1$ we have  
+
+i. optimal point forecast 
+$$
+    f_{t,1} = \mu_{t+1|t} = E(Y_{t+1}|I_t) = E(\mu + \varepsilon_{t+1} + \theta_1 \varepsilon_t + \theta_2 \varepsilon_{t-1}) = \mu + \theta_1 \varepsilon_t + \theta_2 \varepsilon_{t-1}
+$$
+
+ii. 1-period-ahead forecast error 
+$$
+    e_{t,1} = Y_{t+1} - f_{t,1} = \mu + \varepsilon_{t+1} + \theta_1 \varepsilon_t + \theta_2 \varepsilon_{t-1} - \mu - \theta_1 \varepsilon_t - \theta_2 \varepsilon_{t-1} = \varepsilon_{t+1}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+1|t}^2 = var(e_{t+1}) = \sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+1}|I_t) \sim N(\mu + \theta_1 \varepsilon_t + \theta_2 \varepsilon_{t-1}, \sigma_\varepsilon^2)
+$$
+ 
+v. using the density forecast we can construct interval forecasts - since for $Z \sim N(0,1)$ we have $P(-1.96 \leq Z \leq 1.96) = 0.95$, the 95\% interval forecast for $Y_{t+1}$ is
+$$
+    \mu_{t+1|t} \pm 1.96 \sigma_{t+1|t} = (\mu_{t+1|t} - 1.96 \sigma_{t+1|t}, \mu_{t+1|t} + 1.96 \sigma_{t+1|t})
+$$
+
+
+
+## 6.3.2 MA(2) Process
+
+- for MA(2) model and forecasting horizon $h=2$ we have  
+
+i. optimal point forecast 
+$$
+    f_{t,2} = \mu_{t+2|t} = E(Y_{t+2}|I_t) = E(\mu + \varepsilon_{t+2} + \theta_1 \varepsilon_{t+1} + \theta_2 \varepsilon_t) = \mu + \theta_2 \varepsilon_t
+$$
+
+ii. 2-period-ahead forecast error 
+$$
+    e_{t,2} = Y_{t+2} - f_{t,2} = \mu + \varepsilon_{t+2} + \theta_1 \varepsilon_{t+1} + \theta_2 \varepsilon_{t} - \mu - \theta_2 \varepsilon_{t}  = \varepsilon_{t+2} + \theta_1 \varepsilon_{t+1}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+2|t}^2 = var(e_{t+2}) = (1+\theta_1^2)\sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+2}|I_t) \sim N(\mu + \theta_2 \varepsilon_t, (1+\theta_1^2)\sigma_\varepsilon^2)
+$$
+
+
+
+## 6.3.2 MA(2) Process
+
+- for MA(2) model and forecasting horizon $h=s$ with $s>2$ we have  
+
+i. optimal point forecast 
+$$
+    f_{t,s} = \mu_{t+s|t} = E(Y_{t+s}|I_t) = \mu
+$$
+
+ii. $s$-period-ahead forecast error 
+$$
+    e_{t,s} = Y_{t+s} - f_{t,s} = \mu + \varepsilon_{t+s} + \theta \varepsilon_{t+s-1} - \mu = \varepsilon_{t+s} + \theta_1 \varepsilon_{t+s-1} + \theta_2 \varepsilon_{t+s-2}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+s|t}^2 = var(e_{t+s}) = (1+\theta_1^2+\theta_2^2)\sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+s}|I_t) \sim N(\mu, (1+\theta_1^2+\theta_2^2)\sigma_\varepsilon^2)
+$$
+
+- forecasting with an MA(2) is thus limited by the short memory - for $h > 2$ the optimal forecast is identical to the unconditional mean of the process
+
+
+
+
+## 6.3.2 MA($q$) Process
+
+- for MA($q$) the AC and PAC functions satisfy similar properties as those for MA(2) process
+
+- first $q$ components in sample AC function are different from zero $\hat \rho_k \neq 0$ for $k= 1,2,\ldots, q$
+
+- remaining autocorrelations are equal to zero $\hat \rho_k = 0$ for $k > q$
+
+- sample PAC function decreases toward zero (in exponential or in oscillating pattern)
+
+- forecasting with an MA($q$) is quite limited - for $h > q$ the optimal forecast is identical to the unconditional mean of the process
+
+
+
+## 6.3.2 MA($q$) Process
+
+Forecasting Growth of Employment in Nonfarm Business Sector
+ 
+- download [PRS85006013_Q.xls](http://myweb.ttu.edu/jduras/files/teaching/e4306/PRS85006013_Q.xls)
+obtained from [fred.stlouisfed.org/series/PRS85006013](https://fred.stlouisfed.org/series/PRS85006013), import it into EViews as time series `emp` 
+
+- generate time series `gemp` as percentage change of `emp`
+
+- AC and PAC suggest that MA(3) process $y_t = \mu + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2} + \theta_3 \varepsilon_{t-3}$ can be used to model `gemp`
+
+- we will use 1947Q2-2014Q4 as estimation sample and 2015Q1-2016Q4 as prediction sample 
+
+- we will thus construct forecast for $h=1,2,\ldots,8$ so 1-step to 8-step ahead forecasts
+
+
+
+## 6.3.2 MA($q$) Process
+
+- first, to estimate parameters $\mu,\theta_1,\theta_2,\theta_3$ of the MA(3) process 
+$$
+  y_t = \mu + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2} + \theta_3 \varepsilon_{t-3}
+$$
+in EViews choose **Object** $\rightarrow$ **New Object** $\rightarrow$ **Equation**, in equation specification write **gemp c MA(1) MA(2) MA(3)**, and in sample write 1947Q2-2014Q4
+
+- afterwards to create a multistep forecast in EViews open the equation and choose **Proc** $\rightarrow$ **Forecast**, enter name gempf_se for standard deviation $\sigma_{t+h|t}$ into "S.E. (optional)", change forecast sample to 2015Q1-2016Q4, and select "Dynamic forecast" method in the forecast window
+ 
+- to construct the lower and the upper bounds of the 95% confidence interval $(\mu_{t+h|t} - 1.96\sigma_{t+h|t}, \mu_{t+h|t} + 1.96\sigma_{t+h|t})$ choose **Object** $\rightarrow$ **Generate series** set sample to 2015Q1-2016Q4 and enter first **gempf_lb = gempf - 1.96 gempf_se** and then the second time **gempf_ub = gempf + 1.96 gempf_se**
+
+- to construct time series with unconditional mean of `gemp` choose **Object** $\rightarrow$ **Generate Series** and enter **gemp_mean = @mean(gemp)**
+
+
+<!--
+## 6.3.2 MA($q$) Process
+
+- the following steps show how to add recession bars to a graph 
+
+- first download [USREC_Q.xls](http://myweb.ttu.edu/jduras/files/teaching/e4306/USREC_Q.xls) obtained from [fred.stlouisfed.org/series/USREC](https://fred.stlouisfed.org/series/USREC), import it into EViews as time series `USREC` 
+
+- select the times series of interest to be plotted and also `USREC`, open them as group, and create a time series plot as follows
+
+- under Graph Type
+    - in Basic type change graph type from Line \& Symbol to Mixed
+    - in Mixed Settings change the type for `USREC` to Bar, keep the others as line
+- under Axes \& Scaling 
+    - in Data scaling change Series axis assignment for `USREC` from Left to Right
+    - in Data scaling change Right axis scale endpoints to User specified and enter 1 for Max
+    - in Data scaling change Dual axis scaling to Overlap scales
+    - in Data axis labels change Edit axis to right and then check the box Hide labels
+- under Graph Elements
+    - in Bar-Area-Pie uncheck box Bars under Outline fill areas in
+    - in Bar-Area-Pie uncheck box Space between bars under Bar graphs
+- under Legend
+    - in Attributes change the legend entry for `USREC` to recessions
+
+
+
+## 6.3.2 Moving Averages
+
+- in technical analysis, financial analysts tend to smooth prices in order to detect potential trends
+
+- one simple and popular smoothing tool is the moving average method
+
+- simple 20-day, 50-day, 100-day or 200-day moving average price is obtained as the average of the current price and the previous 19, 49, 99 or 199 prices, that is
+$$
+\begin{aligned}
+    p_t^{MA20} &= \frac{1}{20} (p_t + p_{t-1} + \ldots + p_{t-19}) \\
+    p_t^{MA50} &= \frac{1}{50} (p_t + p_{t-1} + \ldots + p_{t-49}) \\
+    p_t^{MA100} &= \frac{1}{100} (p_t + p_{t-1} + \ldots + p_{t-99}) \\
+    p_t^{MA200} &= \frac{1}{200} (p_t + p_{t-1} + \ldots + p_{t-199})
+\end{aligned}
+$$
+- http://www.investopedia.com/terms/g/goldencross.asp
+ 
+- http://www.investopedia.com/terms/d/deathcross.asp
+
+- smoothing generates autocorrelation in the data because information between consecutive smoothed prices overlaps
+
+- for example, $p^{MA20}_t$ and $p^{MA20}_{t-1}$ have $p_{t-1}, p_{t-2}, \ldots, p_{t-19}$ in common
+
+
+
+## 6.3.2 Moving Averages
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=10cm]{figures/ma.png}
+\end{figure}
+
+
+$$
+\begin{aligned}
+    p_t^{MA20} &= \frac{1}{20} (p_t + p_{t-1} + \ldots + p_{t-19}) \\
+    p_{t-1}^{MA20} &= \frac{1}{20} (p_{t-1} + p_{t-2} + \ldots + p_{t-20}) \\
+    p_{t-20}^{MA20} &= \frac{1}{20} (p_{t-20} + p_{t-21} + \ldots + p_{t-39}) \\
+    p_{t-21}^{MA20} &= \frac{1}{20} (p_{t-21} + p_{t-22} + \ldots + p_{t-40}) \\
+    \\
+    p_t^{MA20} &= p_{t-1}^{MA20} + \frac{1}{20} p_t - \frac{1}{20} p_{t-20} \\
+\end{aligned}
+$$
+
+-->
