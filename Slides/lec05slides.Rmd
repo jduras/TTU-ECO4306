@@ -257,11 +257,11 @@ $$
 
 - import data from Microsoft Excel file [**Figure03_fig01_fig7_DJI.xls**](http://myweb.ttu.edu/jduras/files/teaching/eco4306/Figure03_fig01_fig7_DJI.xls) into EViews: click on **File**, select **Import**, then **Import from file**, and **Finish**
 
-- construct first difference by choosing **Object** then **Generate Series** and entering **d_DJ = d(DJ)**
+- construct first difference $\Delta DJ_t = DJ_t - DJ_{t-1}$ by choosing **Object** then **Generate Series** and entering **d_DJ = d(DJ)**
 
-- construct log transformed data by hosing **Object** then **Generate Series** and entering **log_DJ = log(DJ)**
+- construct log transformed data $\log DJ_t$ by chosing **Object** then **Generate Series** and entering **log_DJ = log(DJ)**
 
-- construct first difference of log transformed data by chosing **Object** then **Generate Series** and entering **d_log_DJ = dlog(DJ)**
+- construct first difference of log transformed data $\Delta \log DJ_t = \log DJ_t - \log DJ_{t-1}$ by chosing **Object** then **Generate Series** and entering **d_log_DJ = dlog(DJ)**
 
 
 
@@ -297,16 +297,32 @@ first differences of Dow-Jones Index after the logarithmic transformation $\Delt
 
 ## 3.2.2 Useful Transformations of Nonstationary Processes
 
-- percentage return 
+- for monthly data, the month-over-month percentage return is calculated as
 $$
-    R_t = 100 \times \frac{Y_t-Y_{t-1}}{Y_{t-1}}
+    r_t = 100 \times \frac{Y_t-Y_{t-1}}{Y_{t-1}}
 $$
-- if $R_t$ is not very large it can be approximated by taking the first differences of its logarithm
+and can be approximated using logarithms because
 $$
-    \Delta \log Y_t = \log Y_t - \log Y_{t-1} = \log \Big( \frac{Y_t}{Y_{t-1}}\Big) = \log\Bigg( 1+\frac{R_t}{100}\Bigg) \approx \frac{R_t}{100}
+    \Delta \log Y_t = \log Y_t - \log Y_{t-1} = \log \Big( \frac{Y_t}{Y_{t-1}}\Big) = \log\Bigg( 1+\frac{r_t}{100}\Bigg) \approx \frac{r_t}{100}
 $$
-- in practical applications in economics and finance, it is very common to transform a nonstationary process by computing the first difference of the logarithm of the series - such transformation has the interpretation of returns or growth rates
+implies that $r_t \approx 100 \Delta Y_t$
 
+<!--
+- in economics and finance, it is very common to transform a nonstationary process by computing the first difference of the logarithm of the series - such transformation has the interpretation of returns or growth rates
+-->
+
+- in some case, we are interested in year-over-year percentage change
+$$
+    r_t^{YoY} =  100 \times \frac{Y_t - Y_{t-12}}{Y_{t-12}}
+$$
+which can be approximated using the following log difference
+$$
+    r_t^{YoY} \approx 100 \Delta_{12} \log Y_t = 100 \times (\log Y_t - \log Y_{t-12} )
+$$
+
+- in EViews we construct $rDJ_t^{YoY} = 100 \times \frac{DJ_t - DJ_{t-12}}{DJ_{t-12}}$ by chosing **Object** then **Generate Series** and entering **r_DJ_YoY = 100 * d(DJ, 0, 12) / DJ(-12)**
+
+- in EViews we construct $100 \times (\log DJ_t - \log DJ_{t-12})$ by chosing **Object** then **Generate Series** and entering **d_log_DJ_YoY = 100 * dlog(DJ, 0, 12)**
 
 
 ## 3.2.2 Useful Transformations of Nonstationary Processes
