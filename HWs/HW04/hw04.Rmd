@@ -1,0 +1,46 @@
+---
+title: '**Homework 4**'
+subtitle: |
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: Wednesday, February 27, before the class
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+## **Problem 1** 
+
+Obtain the annual data for \underline{percentage change} in Per Capita Personal Income in Texas for the period 1947-2017 either from FRED, code [`TXPCPI`](https://alfred.stlouisfed.org/graph/?g=mZGh). Note that so you either need to switch the units to percentage change directly on FRED or construct the percentage change in EViews yourself. 
+
+(a) Change your sample to 1947-2010. Use this data to recreate the two panels in Figure 7.7, but for Texas 1947-2010 instead of California 1969-2002. 
+
+(b) Compare your results in (a) with those in Figure 7.7. Based on the shape of AC and PAC, does the growth in per capita personal income in Texas follow a similar process as the growth in per capita personal income in California?
+
+(c) Use AC and PAC functions from (a) to determine the order $p$ of the suitable AR($p$) model and estimate this AR($p$) model for the period 1947-2010.
+
+(d) Use the model from (c) to create a forecast for period 2011-2017. Also generate the standard errors for this forecast and use it to construct the lower and upper bounds of the 95\% confidence interval for the forecast. Plot the actual data together with the forecast and its 95% confidence interval. 
+
+(e) Comment on the accuracy of the forecast.
+
+
+<!--
+
+## **Problem 2** 
+
+In class we have constructed a forecast using a model for the percentage change of real GDP from the previous quarter, FRED series `A191RL1Q225SBEA`. Consider now the percentage change of real GDP from the same quarter in the previous year, FRED series `A191RO1Q156NBEA`. 
+
+(a) Create time series plot. 
+
+(b) Create the correlogram, use AC and PAC to determine the order of an appropriate AR model.
+
+(c) Estimate the AR model using ... sample 
+
+(d) Used the model from (c) to create a forecast for the ... sample. Also generate the standard errors for this forecast and use it to construct the lower and upper bounds of the 95\% confidence interval for the forecast. Plot the actual data together with the forecast and its 95% confidence interval. 
+
+(e) Comment on the accuracy of the forecast.
+
+-->
