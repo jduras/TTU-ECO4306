@@ -394,7 +394,7 @@ Forecasting 5-year Constant Maturity Yield on Treasury Securities:
 
 - afterwards to create a multistep forecast in EViews open the equation and choose **Proc** $\rightarrow$ **Forecast**, enter name dyf_se for standard deviation $\sigma_{t+h|t}$ into "S.E. (optional)", change forecast sample to 2007M12-2008M4, and select "Dynamic forecast" method in the forecast window
  
-- to construct the lower and the upper bounds of the 95% confidence interval $(\mu_{t+h|t} - 1.96\sigma_{t+h|t}, \mu_{t+h|t} + 1.96\sigma_{t+h|t})$ choose **Object** $\rightarrow$ **Generate series** set sample to 2007M12-2008M4 and enter first **dyf_lb = dyf - 1.96 dyf_se** and then the second time **dyf_ub = dyf + 1.96 dyf_se**
+- to construct the lower and the upper bounds of the 95% confidence interval $(\mu_{t+h|t} - 1.96\sigma_{t+h|t}, \mu_{t+h|t} + 1.96\sigma_{t+h|t})$ choose **Object** $\rightarrow$ **Generate series** set sample to 2007M12-2008M4 and enter first **dyf_lb = dyf - 1.96$^*$dyf_se** and then the second time **dyf_ub = dyf + 1.96$^*$dyf_se**
 
 
 
@@ -604,7 +604,7 @@ in EViews choose **Object** $\rightarrow$ **New Object** $\rightarrow$ **Equatio
 
 - afterwards to create a multistep forecast in EViews open the equation and choose **Proc** $\rightarrow$ **Forecast**, enter name gempf_se for standard deviation $\sigma_{t+h|t}$ into "S.E. (optional)", change forecast sample to 2015Q1-2016Q4, and select "Dynamic forecast" method in the forecast window
  
-- to construct the lower and the upper bounds of the 95% confidence interval $(\mu_{t+h|t} - 1.96\sigma_{t+h|t}, \mu_{t+h|t} + 1.96\sigma_{t+h|t})$ choose **Object** $\rightarrow$ **Generate series** set sample to 2015Q1-2016Q4 and enter first **gempf_lb = gempf - 1.96 gempf_se** and then the second time **gempf_ub = gempf + 1.96 gempf_se**
+- to construct the lower and the upper bounds of the 95% confidence interval $(\mu_{t+h|t} - 1.96\sigma_{t+h|t}, \mu_{t+h|t} + 1.96\sigma_{t+h|t})$ choose **Object** $\rightarrow$ **Generate series** set sample to 2015Q1-2016Q4 and enter first **gempf_lb = gempf - 1.96$^*$gempf_se** and then the second time **gempf_ub = gempf + 1.96$^*$gempf_se**
 
 - to construct time series with unconditional mean of `gemp` choose **Object** $\rightarrow$ **Generate Series** and enter **gemp_mean = @mean(gemp)**
 
