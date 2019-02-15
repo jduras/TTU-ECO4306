@@ -1,0 +1,47 @@
+---
+title: '**Homework 3**'
+subtitle: |
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: Wednesday, February 20, before the class
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+
+## **Problem 1** 
+
+The Federal Reserve Act of 1977 specified that the goals of the Fed are to promote stable prices and maximum employment. The maximum employment in this context is understood as the employment level such that the GDP is at its potential level. The high inflation in 1960s and 1970s then led the Fed under Paul Volcker, as Chairman of the Federal Reserve from August 1979 to August 1987, to focus on lowering the inflation. But since the inflation and GDP respond to monetary policy only with a lag, the Fed has to make decisions based on its forecasts of future inflation and  future GDP growth. The inevitable forecast errors are costly, which leads to the concept of the loss function we discussed in class. This problem will ask you to investigate some properties of the Fed's loss function for inflation forecasts under Paul Volcker.
+
+<!--
+Download [hw03.xlsx]() which contains the quarterly time series for the inflation rate based on the GDP deflator and the real GDP growth rate during the Paul Volcker period, 1979Q4-1987Q3, both obtained from [research.stlouisfed.org](https://research.stlouisfed.org). In addition it also contains the 1-quarter-ahead forecasts for the two series, obtained from [www.philadelphiafed.org/research-and-data/real-time-center/greenbook-data/philadelphia-data-set](https://www.philadelphiafed.org/research-and-data/real-time-center/greenbook-data/philadelphia-data-set).
+-->
+
+Download the file [hw03.xlsx](http://myweb.ttu.edu/jduras/files/teaching/eco4306/hw03.xlsx) which contains the quarterly time series `GPGDP` for the inflation rate based on the GDP deflator during the Paul Volcker period, 1979Q4-1987Q3, obtained from [research.stlouisfed.org](https://research.stlouisfed.org). In addition it also contains time series `GPGDP_F1`, Fed's 1-quarter-ahead forecasts for that inflation rate, obtained from [www.philadelphiafed.org/research-and-data/real-time-center/greenbook-data/philadelphia-data-set](https://www.philadelphiafed.org/research-and-data/real-time-center/greenbook-data/philadelphia-data-set).
+
+Note the time shift between the two variables: the *first* observation of `GPGDP_F1`, for 1979Q4, is the forecast in 1979Q4 of the inflation in 1980Q1, the actual value of which is the *second* observation of `GPGDP`, and so on.
+
+\smallskip
+
+<!--
+Consider the actual inflation rate, series `GPGDP`, and its 1-step ahead forecast, series `GPGDP_F1`.
+-->
+
+(a) Create a time series plot showing together actual values `GPGDP` and 1-step ahead forecasts `GPGDP_F1(-1)`. Is there any trend? Does one time series appear to be above the other one most of the time?
+(b) Generate 1-quarter-ahead forecast errors $e_{t,1}=y_{t+1}-f_{t,1}$ as `GPGDP_E1 = GPGDP - GPGDP_F1(-1)`. Create a time series plot for forecast errors. Do they appear to be distributed more or less symmetrically around zero, or are they positive or negative most of the time?
+(c) Obtain histogram and descriptive statistics for forecast errors `GPGDP_E1`. Are they normally distributed? 
+(d) Estimate the regression $e_{t,1} = \beta_0 + \varepsilon_t$ where $e_{t,1}$ is the 1-step-ahead forecast error, i.e. regress `GPGDP_E1` on constant only. Is $\hat \beta_0$ statistically significantly different from zero here?  Recall that under symmetric quadratic loss function forecast is unbiased, $f_{t,1} = \mu_{t+1|t}$ and $E(e_{t,1})=0$, which would imply $\hat \beta_0 = 0$. 
+(e) Estimate the regression $y_{t+1} = \beta_0 + \beta_1 f_{t,1} + \varepsilon_{t+1}$ where $y_{t+1}$ is the actual value and $f_{t,1}$ is the 1-quarter-ahead forecast, i.e. regress `GPGDP` on constant and `GPGDP_F1(-1)`. Recall that under symmetric quadratic loss function the forecast is unbiased, $f_{t,1} = \mu_{t+1|t}$, and so in this case the regression would yield $\hat \beta_0 = 0$ and $\hat \beta_1 = 1$. Perform an F-test for the joint hypothesis $H_0: \beta_0=0, \beta_1=1$ to confirm/reject this.
+(f) Obtain the correlogram for forecast errors. Do you observe any time dependence in the forecast error, or are the components of the AC and PAC functions within the 95% confidence interval around zero?
+(g) If the forecast is optimal under symmetric quadratic loss function, $f_{t,1} = \mu_{t+1|t}$, and the forecast errors should be white noise with no time dependence, unbiased, with zero mean. Summarize the results from (a)-(e). Was the Fed under Paul Volcker producing forecasts which are optimal under the  assumption of a symmetric quadratic loss function, or is there some evidence that Fed's loss function was asymmetric?
+
+
+<!--
+## **Problem 2** (Optional)
+
+Redo Problem 1, now for actual real GDP growth rate, `GRGDP`, and its one step ahead forecast, `GRGDP_F1`.
+-->
