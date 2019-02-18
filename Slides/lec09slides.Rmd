@@ -1,0 +1,413 @@
+---
+title: "Eco 4306 Economic and Business Forecasting"
+subtitle: | 
+            | Chapter 7: Forecasting with Autoregressive (AR) Processes
+#            | Lecture 9
+author: 
+date: 
+fontsize: 8pt
+output: 
+  beamer_presentation:
+#    incremental: true
+    highlight: tango
+    fonttheme: professionalfonts
+    includes:
+      in_header: lecturesfmt.tex
+---
+
+
+## Outline
+
+- introduce the autoregressive processes 
+
+- autocorrelation function - again helps us understand the past dependence, and help us to predict the dependence between today's information and the future
+
+<!--
+- recall: autocorrelation function .. .the dependence between random variables in different periods of time, for instance, $\rho_5$ is the autocorrelation between $Y_t$ and $Y_{t-5}$, that is, between today and five periods ago, but assuming that the process is stationary it is also the autocorrelation between $Y_t$ and $Y_{t+5}$, that is, between today and five periods into the future 
+-->
+
+
+## 7.2 Autoregressive Models
+
+- simple linear regression model with cross sectional data
+$$
+    Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
+$$
+- suppose we are dealing with time series rather than cross sectional data, so that
+$$
+    Y_t = \beta_0 + \beta_1 X_t + \epsilon_t
+$$
+and if the explanatory variable is the lagged dependent variable $X_t=Y_{t-1}$ we get
+$$
+    Y_t = \beta_0 + \beta_1 Y_{t-1} + \epsilon_t
+$$
+- main idea: past is prologue as it determines the present, which in turn sets the stage for future
+
+
+<!--
+## 7.2 Autoregressive Models
+
+- http://www.fox.com/watch/772597827933/7684451328
+
+- hourly time series for Akkoro Kamui's activities, before the fortress was built
+$$
+    \{ y_1, y_2, \ldots, y_t \} = \{ drink, drink, \ldots, drink \}
+$$
+
+- lots of time dependence here:
+$$
+    y_t = y_{t-1}
+$$
+-->
+
+
+## 7.2 Autoregressive Models
+
+- autoregressive (AR) model is a regression model in which the dependent variable and the regressors belong to the same stochastic process, and $Y_t$ is regressed on the lagged values of itself $Y_{t-1}, Y_{t-2}, \ldots, Y_{t-p}$
+
+- stochastic process $\{Y_t\}$ follows an **autoregressive model** of order $p$, referred as AR$(p)$, if
+$$
+    Y_t = c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \ldots + \phi_p Y_{t-p} + \varepsilon_t
+$$
+where $\varepsilon_t$ is a white noise process
+
+- the order is given by the largest lag in the right-hand side of the model, so a model $Y_t = c + \phi_2 Y_{t-2} + \varepsilon_t$ is an autoregressive process AR(2) even though it has only one regressor in the right-hand side
+
+
+
+## 7.2 Autoregressive Models
+
+- we'll first analyze AR(1) and AR(2), then generalize to an autoregressive process AR$(p)$
+
+- three questions we want to answer
+
+    1. What does a time series of an AR process look like?
+    
+    2. What do the corresponding autocorrelation functions (AC and PAC) look like?
+    
+    3. What is the optimal forecast for an AR process?
+
+
+## 7.2.1 The AR(1) Process
+
+- consider the AR(1) process 
+$$
+    Y_t = c + \phi_1 Y_{t-1} + \varepsilon_t
+$$
+for different values of $\phi_1$
+
+- $\phi_1$ is called the **persistence parameter**, with larger $\phi_1$ the series will remain below or above the unconditional mean for longer periods
+
+- AR(1) process is second order weakly stationary if $|\phi_1| < 1$
+
+
+
+## 7.2.1 The AR(1) Process
+
+- unconditional population mean, provided that AR(1) is weakly stationary, i.e. if $|\phi_1| < 1$
+$$
+    E(Y_t) = E(c + \phi_1 Y_{t-1} + \varepsilon_t) = c + \phi_1 E(Y_{t-1}) = c + \phi_1 E(Y_t) = \frac{c}{1-\phi_1}
+$$
+
+- unconditional variance, provided that AR(1) is weakly stationary, i.e. if $|\phi_1| < 1$
+$$
+    var(Y_t) = var(c + \phi_1 Y_{t-1} + \varepsilon_t) = \phi_1^2 var(Y_{t-1}) + \sigma_\varepsilon^2 = \phi_1^2 var(Y_t) + \sigma_\varepsilon^2 = \frac{\sigma_\varepsilon^2}{1-\phi_1^2}
+$$
+
+
+
+## 7.2.1 The AR(1) Process
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{../Sources/books/rivera/figures/fig7_4.png}
+\end{figure}
+
+
+
+## 7.2.1 The AR(1) Process
+
+autocorrelation functions of an AR(1) process with $\phi_1>0$ have three distinctive features
+
+1. for theoretical autocorrelation (AC) and partial autocorrelation (PAC) functions $\rho_1 = r_1 = \phi_1$ but since sample AC and PAC functions are just estimates of the theoretical ones there is some sampling error
+
+2. AC decreases exponentially toward zero, decay is faster when $\phi_1$ is smaller; this exponential decay is given by the formula $\rho_k = \phi_1^k$; e.g. with $\phi_1 = 0.95$ we have $\rho_1 = 0.95, \rho_2 = 0.95^2 = 0.90, \rho_3 = 0.95^3 = 0.86$, ...
+
+3. PAC is characterized by only one spike: $r_1 \neq 0$, and $r_k = 0$ for $k > 1$
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=11cm]{../Sources/books/rivera/figures/fig7_5.png}
+\end{figure}
+
+
+
+## 7.2.1 The AR(1) Process
+
+- if $\phi_1 < 0$ the autocorrelation functions have the same three properties above 
+
+- main difference: negative sign of the persistence parameter, causes the oscillating behavior of AC which switch between positive an negative numbers
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{../Sources/books/rivera/figures/fig7_6.png}
+\end{figure}
+
+
+
+## 7.2.1 The AR(1) Process
+
+- Growth of Per Capita Personal Income Growth in California, 1969-2002, [Figure07_07_CAincome.xls](http://myweb.ttu.edu/jduras/files/teaching/eco4306/Figure07_07_CAincome.xls)
+<!--
+see https://alfred.stlouisfed.org/graph/?g=n0GU
+-->
+
+- based on AC and PAC, an AR(1) model seem to be a good starting point in the search for an appropriate model
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{../Sources/books/rivera/figures/fig7_7.png}
+\end{figure}
+
+
+
+## 7.2.1 The AR(1) Process
+
+- recall: under quadratic loss function the optimal point forecast is conditional mean, $f_{t,h} = \mu_{t+h|t} = E(Y_{t+h}|I_t)$ 
+
+$h$         $\mu_{t+h|t}$                                               $\sigma_{t+h|t}^2$
+----        ---                                                         ---                 
+1           $c + \phi_1 y_t$                                            $\sigma_\varepsilon^2$
+2           $(1+\phi_1)c + \phi_1^2 y_t$                                $(1+\phi_1^2) \sigma_\varepsilon^2$
+$\vdots$
+$s$         $(1+\phi_1+\phi_1^2+\ldots+\phi_1^{s-1})c + \phi_1^s y_t$   $(1+\phi_1^2+\phi_1^4+ \ldots +\phi_1^{2(s-1)}) \sigma_\varepsilon^2$
+----        ---                                                         ---                 
+
+- note that as $s\rightarrow \infty$ the forecast converges to the unconditional mean
+ 
+$$
+\begin{aligned}
+     f_{t,s} &= (1+\phi_1+\phi_1^2+\phi_1^3+\ldots)c = \frac{c}{1-\phi_1} \\
+     \sigma_{t+s|t}^2 &= (1+\phi_1^2+\phi_1^4+ \phi_1^6 + \ldots) = \frac{\sigma_\varepsilon^2}{1-\phi_1^2}
+\end{aligned}
+$$
+
+- forecasting with an AR(1) is limited by the short memory of the process - in the long run the forecast converges to the unconditional mean
+
+
+
+<!--
+## 7.2.1 The AR(1) Process
+
+- for AR(1) model and forecasting horizon $h=1$ we have
+
+i. optimal point forecast 
+$$
+    f_{t,1} = \mu_{t+1|t} = E(Y_{t+1}|I_t) = E(c + \phi_1 Y_t + \varepsilon_{t+1} |I_t) = c + \phi_1 y_t
+$$
+
+ii. 1-period-ahead forecast error 
+$$
+    e_{t,1} = Y_{t+1} - f_{t,1} = c + \phi_1 y_t + \varepsilon_{t+1} - c - \phi_1 y_t = \varepsilon_{t+1}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+1|t}^2 = var(e_{t,1}|I_t) = \sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+1}|I_t) \sim N(c + \phi_1 y_t, \sigma_\varepsilon^2)
+$$
+ 
+v. using the density forecast we can construct interval forecasts - since for $Z \sim N(0,1)$ we have $P(-1.96 \leq Z \leq 1.96) = 0.95$, the 95\% interval forecast for $Y_{t+1}$ is
+$$
+    \mu_{t+1|t} \pm 1.96 \sigma_{t+1|t} = (\mu_{t+1|t} - 1.96 \sigma_{t+1|t}, \mu_{t+1|t} + 1.96 \sigma_{t+1|t})
+$$
+
+
+
+## 7.2.1 The AR(1) Process
+
+- for AR(1) model and forecasting horizon $h=2$ we have
+
+i. optimal point forecast 
+$$
+    f_{t,2} = \mu_{t+2|t} = E(Y_{t+2}|I_t) = E(c + \phi_1 Y_{t+1} + \varepsilon_{t+2} |I_t) = (1+\phi_1)c + \phi_1^2 y_t
+$$
+
+ii. 2-period-ahead forecast error 
+$$
+    e_{t,2} = Y_{t+2} - f_{t,2} = c + \phi_1 Y_{t+1} + \varepsilon_{t+2} - ( c + \phi_1 f_{t,1} ) = \phi_1 \varepsilon_{t+1} + \varepsilon_{t+2}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+2|t}^2 = var(e_{t,2}|I_t) = (1+\phi_1^2) \sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+2}|I_t) \sim N((1+\phi_1)c + \phi_1^2 y_t, (1+\phi_1^2)\sigma_\varepsilon^2)
+$$
+ 
+v. using the density forecast we can construct interval forecasts - since for $Z \sim N(0,1)$ we have $P(-1.96 \leq Z \leq 1.96) = 0.95$, the 95\% interval forecast for $Y_{t+1}$ is
+$$
+    \mu_{t+1|t} \pm 1.96 \sigma_{t+1|t} = (\mu_{t+1|t} - 1.96 \sigma_{t+1|t}, \mu_{t+1|t} + 1.96 \sigma_{t+1|t})
+$$
+
+
+
+## 7.2.1 The AR(1) Process
+
+- for AR(1) model and forecasting horizon $h=s$ we have
+
+i. optimal point forecast 
+$$
+    f_{t,s} = \mu_{t+s|t} = E(Y_{t+s}|I_t) = (1+\phi_1+\phi_1^2+\ldots+\phi_1^{s-1})c + \phi_1^s y_t
+$$
+
+ii. s-period-ahead forecast error 
+$$
+    e_{t,s} = Y_{t+s} - f_{t,s} = \phi_1^{s-1} \varepsilon_{t+1} + \phi_1^{s-2} \varepsilon_{t+2} + \ldots + \varepsilon_{t+s}
+$$
+
+iii. uncertainty associated with the forecast is summarized by the variance of the forecast error
+$$
+    \sigma_{t+s|t}^2 = var(e_{t,s}|I_t) = (1+\phi_1^2+\phi_1^4+ \ldots +\phi_1^{2(s-1)}) \sigma_\varepsilon^2
+$$
+
+iv. density forecast is the conditional probability density function of the process at the future date; assuming $\varepsilon_t$ is  normally distributed we have
+$$
+    f(Y_{t+s}|I_t) \sim N(\mu_{t+s|t},\sigma_{t+s|t}^2)
+$$
+ 
+ - note that as $s\rightarrow \infty$ the forecast converges to the undonditional mean
+ 
+$$
+\begin{aligned}
+     f_{t,s} &= (1+\phi_1+\phi_1^2+\phi_1^3+\ldots)c = \frac{c}{1-\phi_1} \\
+     \sigma_{t+s|t}^2 &= (1+\phi_1^2+\phi_1^4+ \phi_1^6 + \ldots) = \frac{\sigma_\varepsilon^2}{1-\phi_1^2}
+\end{aligned}
+$$
+-->
+
+
+## 7.2.2 The AR(2) Process
+
+- consider the AR(2) process 
+$$
+    Y_t = c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \varepsilon_t
+$$
+
+- unconditional population mean, provided that AR(2) is weakly stationary
+$$
+\begin{aligned}
+    E(Y_t) &= E(c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \varepsilon_t) = c + \phi_1 E(Y_{t-1}) + \phi_2 E(Y_{t-2}) \\
+           &= c + \phi_1 E(Y_t) + \phi_2 E(Y_t) = \frac{c}{1-\phi_1-\phi_2}
+\end{aligned}
+$$
+
+- unconditional variance, provided that AR(2) is weakly stationary
+$$
+\begin{aligned}
+    var(Y_t) &= var(c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \varepsilon_t) = \phi_1^2 var(Y_{t-1}) +  \phi_2^2 var(Y_{t-2}) + \sigma_\varepsilon^2 \\
+             &= \phi_1^2 var(Y_t) + \phi_2^2 var(Y_t) + \sigma_\varepsilon^2 = \frac{\sigma_\varepsilon^2}{1-\phi_1^2-\phi_2^2}
+\end{aligned}
+$$
+
+
+
+## 7.2.2 The AR(2) Process
+
+- larger values of $\phi_1+\phi_2$ imply smoother time series
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=11cm]{../Sources/books/rivera/figures/fig7_8.png}
+\end{figure}
+
+- if $\phi_1+\phi_2=1$ time series becomes non-stationary
+\begin{figure}[h]
+    \includegraphics[trim=-5cm 0cm 0cm 0cm, clip, width=5cm]{../Sources/books/rivera/figures/fig7_9.png}
+\end{figure}
+
+
+
+## 7.2.2 The AR(2) Process
+
+autocorrelation functions of an AR(2) process have three distinctive features
+
+1. for theoretical autocorrelation (AC) and partial autocorrelation (PAC) functions $\rho_1 = r_1$ and $r_2=\phi_2$ but since sample AC and PAC functions are just estimates of the theoretical ones there is some sampling error
+
+2. AC decreases toward zero, either in wave-like pattern, in oscillating pattern, or in exponentially decaying pattern
+
+3. PAC is characterized by only two non-zero spikes: $r_1 \neq 0$, $r_2 \neq 0$, and $r_k = 0$ for $k > 2$
+
+\begin{figure}[h]
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=11cm]{../Sources/books/rivera/figures/fig7_10.png}
+\end{figure}
+
+
+
+## 7.2.2 The AR(2) Process
+
+- recall: under quadratic loss function the optimal point forecast is conditional mean, $f_{t,h} = \mu_{t+h|t} = E(Y_{t+h}|I_t)$ 
+
+$h$         $\mu_{t+h|t}$                                          $\sigma_{t+h|t}^2$
+----        ---                                                    ---                 
+1           $c + \phi_1 y_t + \phi_2 y_{t-1}$                      $\sigma_\varepsilon^2$
+2           $c + \phi_1 f_{t,1} + \phi_2 y_t$                      $(1+\phi_1^2) \sigma_\varepsilon^2$
+$\vdots$
+$s$         $c + \phi_1 f_{t,s-1}+ \phi_2 f_{t,s-2}$               $\sigma_\varepsilon^2 + \phi_1^2 \sigma_{t+s-1|t}^2 + \phi_2^2 \sigma_{t+s-2|t}^2 + 2 \phi_1 \phi_2 cov(e_{t,s-1},e_{t,s-2})$
+----        ---                                                         ---                 
+
+- just like in the case of AR(1), as $s\rightarrow \infty$ the forecast $f_{t,s}$ converges to the unconditional mean, and the variance of the forecast error $e_{t,s}$ converges to the unconditional variance of the process
+
+- forecasting with an AR(2) is again limited by the short memory of the process
+
+
+
+## 7.2.3 The AR($p$) Process
+
+- consider the AR($p$) process 
+$$
+    Y_t = c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \ldots + \phi_p Y_{t-p} + \varepsilon_t
+$$
+
+- unconditional population mean, provided that AR($p$) is weakly stationary
+$$
+\begin{aligned}
+    E(Y_t) &= \frac{c}{1-\phi_1-\phi_2-\ldots-\phi_p}
+\end{aligned}
+$$
+
+- unconditional variance, provided that AR($p$) is weakly stationary
+$$
+\begin{aligned}
+    var(Y_t) = \frac{\sigma_\varepsilon^2}{1-\phi_1^2-\phi_2^2-\ldots-\phi_p^2}
+\end{aligned}
+$$
+
+
+
+## 7.2.3 The AR($p$) Process
+
+autocorrelation functions of an AR($p$) process have following features
+
+1. $\rho_1 = r_1$
+
+2. AC decreases toward zero, either in wave-like pattern, in oscillating pattern, or in exponentially decaying pattern
+
+3. PAC has only $p$ non-zero spikes: $r_k \neq 0$ if $k\leq p$, and $r_k = 0$ for $k > p$
+
+
+
+## 7.2.3 The AR($p$) Process
+
+- under quadratic loss function the optimal point forecast is conditional mean, $f_{t,h} = \mu_{t+h|t} = E(Y_{t+h}|I_t)$ and we have
+
+$h$         $\mu_{t+h|t}$                                                           $\sigma_{t+h|t}^2$
+----        ---                                                                     ---                 
+1           $c + \phi_1 y_t + \phi_2 y_{t-1} + \ldots + \phi_p y_{t-p}$             $\sigma_\varepsilon^2$
+2           $c + \phi_1 f_{t,1} + \phi_2 y_t + \ldots + \phi_p y_{t-p+1}$           $(1+\phi_1^2) \sigma_\varepsilon^2$
+$\vdots$
+$s$         $c + \phi_1 f_{t,s-1}+ \phi_2 f_{t,s-2} + \ldots + \phi_p f_{t,s-p}$    $\sigma_\varepsilon^2 + \sum_{i=1}^p \phi_i^2 \sigma_{t+s-i|t}^2 + 2 \sum_{i=1}^p \sum_{j=i+1}^p \phi_i \phi_j cov(e_{t,s-i},e_{t,s-j})$
+----        ---                                                                     ---                 
+
+- just like in the case of AR(1) and AR(2), as $s\rightarrow \infty$ the forecast $f_{t,s}$ converges to the unconditional mean, and the variance of the forecast error $e_{t,s}$ converges to the unconditional variance of the process
