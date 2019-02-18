@@ -220,7 +220,9 @@ if we need a long-term forecast, there are two ways to go
 
 ## 4.2.1 Forecasting Environments
 
+<!--
 **(how to avoid backing the wrong horse)**
+-->
 
 - suppose that we have a time series with $T$ observations, $\{y_1, y_2, \ldots, y_T\}$
 
@@ -358,7 +360,6 @@ what the best forecast is depends on the purpose of the forecast, its intended u
 - information set $I_t$ will contain the distance between Riverside and LAX, rush hours in the area highways, construction work in the area, time needed for check-in at LAX, time needed for security check at LAX
 - suppose the actual time could be either 5 hours or 3 hours with equal probability
 - suppose your forecast is the average time needed $f_{t,1} = E(Y_{t+1}|I_t) = 4$ hours
-
 $$
     f_{t,1} = 4 \qquad y_{t+1} 
     = \Big\{
