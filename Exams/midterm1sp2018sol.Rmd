@@ -1,0 +1,221 @@
+---
+fontsize: 11pt
+geometry: margin=0.85in
+linkcolor: magenta
+urlcolor: magenta
+output:
+  pdf_document:
+    highlight: tango
+    includes:
+      before_body: myprefix.tex
+      in_header: myheader.tex
+    # keep_tex: yes
+    # number_sections: yes
+
+---
+
+ \begin{center}
+    {\Large 
+    Texas Tech University \\
+    Department of Economics \\
+    Spring 2018 \\
+    Eco 4306: Economic and Business Forecasting \\}
+    \medskip\medskip
+    {\bf \Large Midterm 1}
+\end{center} \medskip
+
+
+\vspace{3cm}
+
+Name: 
+
+ID:
+
+\vspace{3cm}
+
+
+\noindent {Short questions (45 points)} \smallskip\newline
+\indent {\bf Q1.} 7.5 points  \newline
+\indent {\bf Q2.} 7.5 points  \newline
+\indent {\bf Q3.} 7.5 points  \newline
+\indent {\bf Q4.} 7.5 points  \newline
+\indent {\bf Q5.} 7.5 points  \newline
+\indent {\bf Q6.} 7.5 points  \smallskip
+
+\noindent {Applied problems (60 points)} \smallskip\newline
+\indent {\bf Q7.} 10 points \newline
+\indent {\bf Q8.} 10 points  \newline
+\indent {\bf Q9.} 10 points  \newline
+\indent {\bf Q10.} 10 points  \newline
+\indent {\bf Q11.} 10 points  \newline
+\indent {\bf Q12.} 10 points \smallskip
+
+\begin{center}
+    {\bf \Large Good luck!}
+\end{center}
+
+\newpage
+
+**Question 1** (7.5 points)
+
+Explain the concepts of point forecast, interval forecast, density forecast.
+
+\textcolor{red}{See slides 28 and 29 in} [lec01_02slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec01_02slides.pdf).
+
+\vspace{8cm} 
+
+
+
+**Question 2** (7.5 points)
+
+Explain what loss function is. 
+
+\textcolor{red}{See slides 19 to 23 in} [lec06slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec06slides.pdf).
+\newpage
+
+
+
+**Question 3** (7.5 points)
+
+Give two examples of loss function, one symmetric, one asymmetric. Draw their graphs.
+
+\textcolor{red}{See slides 24 an 25 in} [lec06slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec06slides.pdf).
+
+\vspace{8cm} 
+
+
+
+**Question 4** (7.5 points)
+
+Consider Fed forecasting inflation. Is it likely to have (1) a symmetric loss function, or (2) an asymmetric loss function with larger losses for negative forecast errors, or (3) an asymmetric loss function with larger losses for positive forecast errors? Explain.
+
+\textcolor{red}{See HW3 part (g)} [hw03sol.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/hw03sol.pdf).
+\newpage
+
+
+
+**Question 5** (7.5 points)
+
+Define an AR(1) model (write its equation) and describe how its AC and PAC functions look like.
+
+\textcolor{red}{See slides 6 and 9 in} [lec09slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec09slides.pdf).
+\vspace{8cm} 
+
+
+
+**Question 6** (7.5 points)
+
+Define an MA(2) model (write its equation) and describe how its AC and PAC functions look like.
+
+\textcolor{red}{See slides 24 and 25 in} [lec07slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec07slides.pdf).
+
+\newpage
+
+
+
+**Question 7** (10 points)
+
+Figure below shows the histograms for the real GDP growth rate and the quarterly return for S\&P500 Index during the period 1985Q1-2007Q4. Is the GDP growth rate normally distributed in this sample? How about the returns for S\&P500 Index? 
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=10cm]{figures/sp500_hist.png}
+\end{center}
+
+\textcolor{red}{
+- GDP: p-value for Jarque-Bera statistic is 0.20, since it is larger than 0.1 we can not reject hypothesis that this time series is normally distributed \newline  
+- SP500: p-value for Jarque-Bera statistic is 0.00, so we can strongly reject hypothesis that this time series is normally distributed - this is mainly because of kurtosis much larger than 3 (fat tails)
+}
+
+\newpage
+
+
+
+**Question 8** (10 points)
+
+Figure below shows the time series for the S\&P500 Index, the log transformed S\&P500 Index, and also their first differences. Explain which of the four series are nonstationary, first order weakly stationary, second order weakly stationary.
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=15cm]{figures/sp500.png}
+\end{center}
+
+\textcolor{red}{
+- SP500: it is nonstationary, because it is growing and thus mean is not constant over time \newline
+- log og SP500: it is nonstationary, because it is growing and thus mean is not constant over time \newline
+- first difference of SP500: it is first order weakly stationary stationary, it fluctuates around a constant mean, but its variance is not constant over time, with larger fluctuations toward the end of the sample \newline
+- first difference of log of SP500: it may be first order weakly stationary or second order weakly nonstationary - mean does not appear to be growing over time, whether variance is constant over time or not would need to be further tested \newline
+}
+
+\newpage
+
+
+
+**Question 9** (10 points)
+
+Figure below shows the time series for U.S. real GDP., `RGDP`, Index of Consumer Sentiment `CSENT`, U.S. unemployment rate. `UNRATE` and Employment (Total Nonfarm Payrolls) `PAYEMS`. Explain which of the four series are nonstationary, first order weakly stationary, second order weakly stationary.
+
+\begin{center} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{../HWs/HW02/figures/hw02q01_figA1_gdp.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{../HWs/HW02/figures/hw02q01_figE1_csent.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{../HWs/HW02/figures/hw02q01_figD1_u3rate.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{../HWs/HW02/figures/hw02q01_figF1_payems.png}
+\end{center}
+
+\textcolor{red}{
+- `RGDP0`: it is nonstationary, because it is growing and thus mean is not constant over time \newline
+- `CSENT`: it appears to be stationary since the mean does not grow over time, and there does not seem to be any change in volatility over time \newline
+- `UNRATE`: it appears to be stationary, the mean does not appear to be growing over time, and there does not seem to be any significant change in volatility over time \newline
+- `PAYEMS`: it is nonstationary, because it is growing and thus mean is not constant over time \newline
+}
+
+\newpage
+
+
+
+**Question 10** (10 points)
+
+Figure below show the correlogram for the percentage change in the house price index in San Diego MSA during 1975Q1-2008Q3. Discuss which AR/MA/ARMA models would you consider as plausible candidates for this time series and explain why.
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/sdg_corr.png}
+\end{center}
+
+
+\textcolor{red}{
+Since ACF declines very slowly in an oscillating way, and in addition only lags 1, 2, and 4 are statistically significant in PACF, two good candidate models are AR(2) and AR(4). }
+
+\newpage
+
+
+
+**Question 11** (10 points)
+
+Figure below shows the correlogram for the residuals from AR(2) and AR(4) models for the percentage change in the house price index in San Diego MSA. For a good model, the residuals should be white noise with no time dependence. Do the residuals from AR(2) and AR(4) model satisfy this property? Explain why yes or why no.
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/sdg_corr_ar2.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/sdg_corr_ar4.png}
+\end{center}
+
+\textcolor{red}{
+Residuals from the AR(2) model do not appear to be white noise - lag 4 in ACF and PACF is statistically significant, so there is time dependence in residuals. Including two more lags allows in the AR model fixes this problem: residuals from the AR(4) appear to be white noise, there are no statistically significant lags in ACF and PACF, so there does not seem to be any time dependence in residuals of the AR(4) model.
+}
+
+
+\newpage
+
+
+
+**Question 12** (10 points)
+
+Consider the one quarter ahead Fed's forecast for inflation during the 1979Q4-1987Q3 period. 
+
+Suppose that we want to test whether the Fed's forecast are optimal under the symmetric quadratic loss function, which would imply that $E(y_{t+1})=f_{t,1}$ and thus the forecast error $e_{t,1} = y_{t+1} - f_{t,1}$ would have to satisfy $E(e_{t,1}) = 0$, and in the regression $e_{t,1} = \beta_0 + e_t$ coefficient $\beta_0$ should be zero. Figure below shows that time series plot for the forecast errors, and the results of that regression. 
+
+Interpret these results; what can we say about Fed's loss function during 1979Q4-1987Q3 based on them?
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8.5cm]{../HWs/HW03/figures/hw03q01_fig02_e1_ts.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8.5cm]{../HWs/HW03/figures/hw03q01_fig04_e1_ols.png}
+\end{center}
+
+\textcolor{red}{
+Based on on the time series plot the forecast error appears to be negative most of the time, thus the inflation forecast $f_{t,1}$ tends overestimate the true inflation  $y_{t+1}$. This is confirmed by the negative and statistically significant estimate of $\beta_0$ in the regression. It suggests that the Fed's loss function is not symmetric quadratic but rather asymmetric, with larger losses associated with underestimating inflation. This makes sense intuitively, since the main goal of Fed in the 1980s was to bring down inflation from double digit levels.
+}

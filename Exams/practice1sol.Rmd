@@ -1,0 +1,171 @@
+---
+fontsize: 11pt
+geometry: margin=0.85in
+linkcolor: magenta
+urlcolor: magenta
+output:
+  pdf_document:
+    highlight: tango
+    includes:
+      before_body: myprefix.tex
+      in_header: myheader.tex
+    # keep_tex: yes
+    # number_sections: yes
+---
+
+\begin{center}
+    {\large \bf{Practice Problems 1}}
+\end{center}
+
+**Question 1.** Explain the concepts of point forecast, interval forecast, density forecast.
+
+See slides 28 and 29 in [lec01_02slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec01_02slides.pdf).
+
+**Question 2.** Define first order and second order weakly stationary processes.
+
+See slide 16 in [lec05slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec05slides.pdf).
+
+**Question 3.** Define white noise.
+
+See slide 3 in [lec07slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec07slides.pdf).
+
+**Question 4.** Explain what loss function is. 
+
+See slides 19 to 23 in [lec06slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec06slides.pdf).
+
+**Question 5.** Give two examples of loss function, one symmetric, one asymmetric.
+
+See slides 24 an 25 in [lec06slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec06slides.pdf).
+
+**Question 6.** Consider Fed forecasting inflation. Is it likely to have (1) a symmetric loss function, or (2) an asymmetric loss function with larger losses for negative forecast errors, or (3) an asymmetric loss function with larger losses for positive forecast errors? Explain.
+
+See HW3 part (g) [hw03sol.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/hw03sol.pdf).
+
+**Question 7.** Consider Congressional Budget Office producing forecasts of future tax revenue, government spending and budget deficits. Is it likely to have a symmetric loss function or are the relative costs of over- and under-predicting tax revenue different, and the loss function is thus asymmetric? Explain.
+
+**Question 8.** Explain how increasing $\phi_1$ in an AR(1) model changes the behavior of time series $Y_t$.
+
+See slides 6 to 10 in [lec09slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec09slides.pdf).
+
+**Question 9.** Define an AR(2) model and describe how its AC and PAC functions look like.
+
+See slides 13 to 15 in [lec09slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec09slides.pdf).
+
+**Question 10.** Define an MA(4) model and describe how its AC and PAC functions look like.
+
+See slides 8 and 31 in [lec07slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec07slides.pdf)
+and slides 9 and 10 in [lec10slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec10slides.pdf).
+
+**Question 11.** Explain the role of the adjusted $R^2$, AIC and SIC, in model selection.
+
+See slide 15 in [lec10slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec10slides.pdf).
+
+<!--
+**Question 12.** Define a pure seasonal S-AR(1) model. Describe how its AC and PAC functions look like.
+
+**Question 13.** Define a model with regular AR(1) and seasonal S-AR(1) components and describe how its AC and PAC functions look like.
+-->
+
+
+\newpage
+
+**Question 14.** Figure below shows the histograms for the real GDP growth rate and the quarterly return for S\&P500 Index during the period 1985Q1-2007Q4. Is the GDP growth rate normally distributed in this sample? How about the returns for S\&P500 Index? 
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/sp500_hist.png}
+\end{center}
+
+See HW1 part (c) [hw01sol.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/hw01sol.pdf).
+
+
+**Question 15.** Figure below shows the time series for the S\&P500 Index, the log transformed S\&P500 Index, and also their first differences. Explain which of the four series are nonstationary, first order weakly stationary, second order weakly stationary.
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=12cm]{figures/sp500.png}
+\end{center}
+
+See slides 19 and 20 in [lec05slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec05slides.pdf) for a very similar example with Dow Jones Index.
+
+
+
+\newpage
+
+**Question 16.** Consider Fed's one quarter ahead forecast for inflation during 1979Q4-1987Q3 period. 
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8.5cm]{figures/fed.png}
+\end{center}
+Suppose that we want to test whether the Fed's forecast are optimal under the symmetric quadratic loss function, which would imply that $E(y_{t+1})=f_{t,1}$ and thus the forecast error $e_{t,1} = y_{t+1} - f_{t,1}$ would have to satify $E(e_{t,1}) = 0$. In other words, if the Fed's forecast are optimal under the symmetric quadratic loss function, the forecast error $e_{t,1}$ should fluctuate around zero, have zero mean, and in the regression $e_{t,1} = \beta_0 + e_t$ coefficient $\beta_0$ should be zero. Figure below shows that time series plot for the forecast errors, and the results of that regression. Interpret these results; what can we say about Fed's loss function during 1979Q4-1987Q3 based on them?
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8.5cm]{../HWs/HW03/figures/hw03q01_fig02_e1_ts.png}
+\end{center}
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8.5cm]{../HWs/HW03/figures/hw03q01_fig04_e1_ols.png}
+\end{center}
+
+
+<!--
+we perform an F-test for the joint hypothesis $H_0: \beta_0=0, \beta_1=1$ in a regression $y_{t+1} = \beta_0 + \beta_1 f_{t,1} + \varepsilon_{t+1}$ where $y_{t+1}$ is the actual inflation and $f_{t,1}$ is the Fed's 1-quarter-ahead forecast. Interpret the results of this test below. What can we say about Fed's loss function during 1979Q4-1987Q3 based on this test?
+\smallskip
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=7.5cm]{../HWs/HW03/figures/hw03q01_fig06_ftest.png}
+\end{center}
+-->
+
+See HW3 parts (b), (d) and (g) in [hw03sol.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/hw03sol.pdf).
+
+\newpage
+
+**Question 17.** Consider two forecasters, A and B, who use the same AR model to forecast the real GDP growth rate during 2011Q1-2016Q4, but produce different forecasts, $f^{(A)}_{t,1} = \mu_{t+1|t}$ and $f^{(B)}_{t,1} = \mu_{t+1|t} - \sigma_{t+1|t}^2$, where $\mu_{t+1|t}=E(y_{t+1}|I_t)$ is the conditional mean, $\sigma_{t+1|t}^2=var(y_{t+1}|I_t)$ the conditional variance. The forecast errors are thus $e^{(A)}_{t,1} = y_{t+1} - \mu_{t+1|t}$ and $e^{(A)}_{t,1} = y_{t+1} - \mu_{t+1|t} + \sigma_{t+1|t}^2$ shown below. Based the forecasts they choose and their forecasting errors, what can we say about the loss functions of these two forecasters - are they symmetric or asymmetric?
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=10cm]{figures/forecasters.png}
+\end{center}
+
+\smallskip
+
+Forecaster A: the forecast is the conditional mean, which is optimal under symmetric quadratic loss function, and the forecast errors are on average zero.
+
+See slide 29 in [lec06slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec06slides.pdf).
+
+Forecaster B: the forecast is biased, since conditional variance is subtracted from the conditional mean, this is optimal under asymmetric linex loss function. Forecasts in this case tend to underpredict actual values and the forecast errors are on average positive.
+
+See slide 30 in [lec06slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec06slides.pdf).
+
+\medskip
+\newpage
+
+<!--
+**Question 20.** Consider the data for monthly changes in U.S. residential construction for the period January 2002-January 2011 shown below. Discuss what kind of model would you estimate for this time series and explain why.
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=13cm]{../Sources/books/rivera/figures/fig7_19.png}
+\end{center}
+-->
+
+**Question 18.** Figure below show the correlogram for the percentage change in the house price index in San Diego MSA during 1975Q1-2008Q3. Discuss which AR/MA/ARMA models would you consider as plausible candidates for this time series and explain why.
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/sdg_corr.png}
+\end{center}
+
+\smallskip
+
+See slides 7 to 10 in [lec10slides.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/lec10slides.pdf).
+
+
+\newpage
+
+**Question 19.** Figure below shows the correlogram for the residuals from AR(2) and AR(4) models for the percentage change in the house price index in San Diego MSA. For a good model, the residuals should be white noise with no time dependence. Do the residuals from AR(2) and AR(4) model satisfy this property?
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/sdg_corr_ar2.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=8cm]{figures/sdg_corr_ar4.png}
+\end{center}
+
+\smallskip
+
+Residuals for the AR(2) model do not appear to come from a white noise - there is some time dependence left in the residuals, since the AC and PAC functions at lag 4 are outside of the 95\% confidence interval around zero, so those autocorrelation coefficients are statistically significant (which can be also seen by the low p values in the Prob column).
+
+Residuals for the AR(4) are very likely to be a white noise - there is no time dependence present in these residuals, AC and PAC functions at all lags are inside of the 95\% confidence interval around zero, and thus are statistically insignificant (which can be also seen by the p values in the Prob column that exceed all three common thresholds, 0.1, 0.05 and 0.01).
