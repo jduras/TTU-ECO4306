@@ -72,6 +72,33 @@ cd %codepath
 wfsave "hw02q01_tb10yr.wf1"
 wfclose
 
+
+import "GS10.csv" ftype=ascii rectype=crlf skip=0 fieldtype=delimited na="." delim=comma colhead=1 eoltype=pad badfield=NA @id @date(date) @smpl @all
+
+genr dgs10= d(gs10)
+genr dlgs10= dlog(gs10)
+
+freeze(gph_gs10_ts) gs10.line
+gph_gs10_ts.datelabel format("YYYY")
+gph_gs10_ts.recshade
+
+freeze(gph_dgs10_ts) dgs10.line
+gph_dgs10_ts.datelabel format("YYYY")
+gph_dgs10_ts.recshade 
+
+freeze(gph_dlgs10_ts) dlgs10.line
+gph_dlgs10_ts.datelabel format("YYYY")
+gph_dlgs10_ts.recshade 
+
+cd %figpath
+gph_gs10_ts.save(t=png) hw02q01_figC1_tb10yr
+gph_dgs10_ts.save(t=png) hw02q01_figC2_tb10yr
+gph_dlgs10_ts.save(t=png) hw02q01_figC3_tb10yr
+
+cd %codepath
+wfsave "hw02q01_tb10yr.wf1"
+wfclose
+
 ' part (d)
 
 cd %codepath
