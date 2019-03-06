@@ -15,7 +15,7 @@ output:
 ## **Problem 1** 
 
 <!--
-Obtain the annual data for \underline{percentage change} in Per Capita Personal Income in Texas either from FRED or from Quandl. The time series in \underline{dollars} is available under code `TXPCPI` on [fred.stlouisfed.org](https://fred.stlouisfed.org) and under `FRED/TXPCPI ` on [www.quandl.com](https://www.quandl.com), so you either need to switch the units to percentage change directly on FRED and Quandl websites, or construct the percentage change in EViews yourself. 
+Obtain the annual data for \underline{percentage change} in Per Capita Personal Income in Texas for the period 1947-2017 from FRED, code [`TXPCPI`](https://alfred.stlouisfed.org/graph/?g=mZGh). Note that this time series on FRED is in dollars, so you either need to switch the units to percentage change directly on FRED or construct the percentage change in EViews yourself. 
 
 (a) Change your sample to 1947-2010. Use this data to recreate the two panels in Figure 7.7, but for Texas 1947-2010 instead of California 1969-2002. 
 
@@ -23,7 +23,7 @@ Obtain the annual data for \underline{percentage change} in Per Capita Personal 
 
 (c) Use AC and PAC functions from (a) to determine the order $p$ of the suitable AR($p$) model and estimate this AR($p$) model for the period 1947-2010.
 
-(d) Use the model form (c) to create a forecast for period 2011-2015. Also generate the standard errors for this forecast and use it to construct the lower and upper bounds of the 95\% confidence interval for the forecast. Plot the actual data together with the forecast and its 95% confidence interval. 
+(d) Use the model from (c) to create a forecast for period 2011-2017. Also generate the standard errors for this forecast and use it to construct the lower and upper bounds of the 95\% confidence interval for the forecast. Plot the actual data together with the forecast and its 95% confidence interval. Change the options for the chart (line colors, text in legend entries) so that is is clear what the chart shows to any person who would look at it.
 
 (e) Comment on the accuracy of the forecast.
 
