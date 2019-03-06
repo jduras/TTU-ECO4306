@@ -1,0 +1,57 @@
+---
+title: '**Homework 4**'
+subtitle: |
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: Wednesday, March 6, before the class
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+## **Problem 1** 
+
+<!--
+Obtain the annual data for \underline{percentage change} in Per Capita Personal Income in Texas either from FRED or from Quandl. The time series in \underline{dollars} is available under code `TXPCPI` on [fred.stlouisfed.org](https://fred.stlouisfed.org) and under `FRED/TXPCPI ` on [www.quandl.com](https://www.quandl.com), so you either need to switch the units to percentage change directly on FRED and Quandl websites, or construct the percentage change in EViews yourself. 
+
+(a) Change your sample to 1947-2010. Use this data to recreate the two panels in Figure 7.7, but for Texas 1947-2010 instead of California 1969-2002. 
+
+(b) Compare your results in (a) with those in Figure 7.7. Based on the shape of AC and PAC, does the growth in per capita personal income in Texas follow a similar process as the growth in per capita personal income in California?
+
+(c) Use AC and PAC functions from (a) to determine the order $p$ of the suitable AR($p$) model and estimate this AR($p$) model for the period 1947-2010.
+
+(d) Use the model form (c) to create a forecast for period 2011-2015. Also generate the standard errors for this forecast and use it to construct the lower and upper bounds of the 95\% confidence interval for the forecast. Plot the actual data together with the forecast and its 95% confidence interval. 
+
+(e) Comment on the accuracy of the forecast.
+
+*Solution*
+-->
+
+(a) The times series plot and the correlogram for real per capita personal income in Texas during the period 1947-2010 are shown below.
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=14cm]{figures/hw04q01_fig01a_gtxpcpi_ts.png}
+\end{center}
+\begin{center}
+    \includegraphics[trim=0cm 7.25cm 0cm 0cm, clip, width=10cm]{figures/hw04q01_fig01b_gtxpcpi_corr.png}
+\end{center}
+
+(b) The time series for real per capita personal income in Texas shows similar behavior as the real per capita personal income in California. The correlograms are also very similar -  AC decays toward zero gradually and PAC only has one significant component at lag 1.
+
+\newpage
+
+(c) For both California and Texas AR(1) model is appropriate since AC decays toward zero gradually and PAC only has one significant component at lag 1. 
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=10cm]{figures/hw04q01_fig02_gtxpcpi_ar1.png}
+\end{center}
+
+(d) Figure below shows the forecast for the period 2011-2015 together with its 95\% confidence interval and the actual values of the real per capita personal income growth in Texas.
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=14cm]{figures/hw04q01_fig03_gtxpcpi_f.png}
+\end{center}
+
+(e) The actual values of the real per capita personal income growth in Texas are in the 95\% confidence interval for the forecast, but this interval is very wide, roughly from -2\% to 12\%. The forecast errors are -5\% between 3\%. The model forecast is thus not particularly precise.
