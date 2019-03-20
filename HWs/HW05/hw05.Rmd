@@ -3,7 +3,7 @@ title: '**Homework 5**'
 subtitle: | 
   | Eco 4306 Economic and Business Forecasting
   | Spring 2019
-  | Due: Thursday, March 22, before the class
+  | Due: Friday, March 22, before the class
 urlcolor: magenta
 linkcolor: magenta
 output:
@@ -22,8 +22,8 @@ Obtain monthly data for change, in millions of dollars, in Total Private Residen
 
 (c) Estimate a suitable multiplicative AR($p$)+S-AR($P$) model for the period 1993M01-2013M12. Create a time series plot with residuals and the correlogram for residuals. If based of these two plots the residuals do not appear to be white noise, modify your model appropriately. Report only the  estimation results, residuals plot and correlogram for the final model you select. Explain why you selected that particular model over possible alternatives.
 
-(d) Create a multistep forecast for period 2014M01-2017M12. Also generate the standard errors for this forecast to construct the lower and upper bounds of the 95\% confidence interval. Plot the actual data together with the forecast and its 95% confidence interval. Report the RMSE for this forecast. 
+(d) Create a multistep forecast for period 2014M01-2017M12. Also generate the standard errors for this forecast to construct the lower and upper bounds of the 95\% confidence interval. Plot the actual data together with the forecast and its 95% confidence interval. Report the RMSE for this forecast. Hint: to generate the multistep forecast in EViews, remember to use the "Dynamic forecast" method option.
 
-(e) Create a sequence of one step ahead forecasts for period 2014M01-2017M12 using fixed forecasting scheme. Also generate the standard errors for this forecast to construct the lower and upper bounds of the 95\% confidence interval. Plot the actual data together with the forecast and its 95% confidence interval. Report the RMSE for this forecast. 
+(e) Create a sequence of one step ahead forecasts for period 2014M01-2017M12 using fixed forecasting scheme. Also generate the standard errors for this forecast to construct the lower and upper bounds of the 95\% confidence interval. Plot the actual data together with the forecast and its 95% confidence interval. Report the RMSE for this forecast. Hint: to generate the fixed scheme forecast in EViews, remember to use the "Static forecast" method option.
 
 (f) Comment on the difference in RMSE and the width of the confidence intervals between (d) and (e) .
