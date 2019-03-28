@@ -1,0 +1,230 @@
+---
+title: 'Forecasting Unemployment Rate in Lubbock County'
+subtitle: | 
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+fontsize: 11pt
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+
+\renewcommand{\baselinestretch}{1.1} \selectfont
+
+# Introduction
+
+The goal of this short report is to present the analysis undertaken to estimate a seasonal ARMA model in order to be able to forecast monthly unemployment rate in Lubbock County, Texas. First, the data is briefly introduced. Next, the estimated model is presented and discussed. Finally, precision of the forecast using the seasonal ARMA model is compared to the precision of the naive forecasting method.
+
+
+
+# Data
+
+Monthly data for the Unemployment Rate in Lubbock County, TX for the period from January 1990 to January 2019 was obtained from FRED, where it is available under the code [TXLUBB3URN](https://fred.stlouisfed.org/series/TXLUBB3URN). Figure below shows the time series plot for the whole sample.
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16cm]{figures/hw07q01_fig00_txlubb3urn_ts_whole.png}
+\end{center}
+
+The estimation sample used to identify and estimate suitable model is January 1990 to December 2013. The remaining part, from January 2014 to January 2019 will be used to evaluate the precision of the forecast. To address the potential problem with non-stationarity, first difference was applied to obtain the change in the unemployment rate
+$$
+  y_t = \Delta TXLUBB3URN_t = TXLUBB3URN_t - TXLUBB3URN_{t-1}
+$$
+Figure below shows this transformed time series $y_t$, which exhibits seasonal variation with significant spikes in January each year when less work is available in agriculture and construction, and also in June of each year when new graduate enter the labor market.
+\begin{center}
+    \includegraphics[trim=0.5cm 0cm -0.5cm 0cm, clip, width=17cm]{figures/hw07q01_fig01_txlubb3urn_ts.png}
+\end{center}
+
+The correlogram of the change in the unemployment rate $y_t$ shown in Appendix A confirms the presence of a seasonal pattern, reflected by a large spike in PAC at lags 12 and 24, and large spikes at multiples of 12 in AC. 
+
+
+
+# Model Estimation
+
+To account for the seasonal pattern (large spike in PAC at lags 12 and 24, and large spikes at multiples of 12 in AC) and also the significant non-seasonal time dependence (significant lags 2 to 4 and 6 to 10 in PAC), a multiplicative seasonal AR(1)-SARMA(1,1) model was estimated  
+$$
+    (1 - \phi_1 L) (1 - \phi_{12} L^{12}) y_t = \phi_0 + (1 + \theta_{12} L^{12}) \varepsilon_t
+$$
+Figure below shows the results of the estimation
+\begin{center}
+    \includegraphics[trim=0cm 3.5cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig03_txlubb3urn_eq1.png}
+\end{center}
+The estimated model thus takes the form
+$$
+    (1 + 0.098 L) (1 - 0.995 L^{12}) y_t = -0.004 + (1 - 0.789 L^{12}) \varepsilon_t
+$$
+
+Residuals are plotted below, they do not appear to show any recognizable pattern, or any changes in volatility over the estimation sample.
+\begin{center}
+    \includegraphics[trim=0.5cm 0cm 0cm 0cm, clip, width=17cm]{figures/hw07q01_fig04_txlubb3urn_eq1_resid_ts.png}
+\end{center}
+Residuals also do not appear to show any remaining significant time dependence, as shown in their correlogram in Appendix B. All components of the AC and PAC functions are within the 95% confidence interval around 0 and the p-values of Ljung-Box statistic are in general large, and are all above 0.3. We can thus conclude that the residuals of the estimated AR(1)-SARMA(1,1) model appear to be white noise.
+
+
+
+# Forecast
+
+As mentioned above, period from January 2014 to January 2019 was used as prediction sample to evaluate the precision of the forecast obtained using the estimated AR(1)-SARMA(1,1) model. 
+
+First, a sequence of one step ahead forecasts was created, together with their 95% confidence interval. They are plotted in the figure below. In general the model forecast is reasonably precise, and can fit the actual path of unemployment rate in Lubbock county well.
+\begin{center}
+    \includegraphics[trim=0cm 0.5cm 0cm 0cm, clip, width=17cm]{figures/hw07q01_fig06_txlubb3urn_eq1_f.png}
+\end{center}
+
+Next, as a benchmark, a simple naive forecast was created for the change in unemployment rate in the same prediction sample January 2014 to January 2019 using 
+$$
+  f^{naive}_{t,1} = y_{t+1-12}
+$$
+This essentially means that the change in the unemployment rate is predicted to be the same as it was in the same month one year ago. The implied forecast for unemployment rate $TXLUBB3URN^{naive}_{t,1}$ was afterwards calculated by adding the forecasted change in unemployment rate in the next month $f^{naive}_{t,1}$ to the actual unemployment rate in the current month $TXLUBB3URN_t$, that is, using
+$$
+  \widehat {TXLUBB3URN^{naive}_{t,1}} = TXLUBB3URN_t + f^{naive}_{t,1}
+$$
+For both forecasts the forecast errors are calculated as
+$$
+  e_{t+1} = y_{t+1} - f_{t,1}
+$$
+and are plotted below
+\begin{center}
+    \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm, clip, width=16.5cm]{figures/hw07q01_fig07_txlubb3urn_eq1_e.png}
+\end{center}
+
+The forecast errors tend to be somewhat smaller in the magnitude. The root mean squared error (RMSE) for forecast using the AR(1)-SARMA(1,1) model is 0.180, while the root mean squared error for forecast using naive forecasting method is 0.221. Thus for both methods it is roughly 0.2 percentage points in the sample where the unemployment rate has been fluctuating in the range from 2.8 to 4.8 percentage points. 
+
+To determine whether the difference in the precision between the two forecasts is statistically significant or not, the test for the equal predictive ability was performed. This was done by estimating a simple regression model 
+$$
+  \Delta L_{t,1} = \beta_0 + u_t
+$$
+where $L_{t,1}$ is the difference between the losses associated with the two alternative forecasts
+$$
+  L_{t,1} = L(e_{t,1}^{SARMA}) - L(e_{t,1}^{naive})
+$$
+and testing the hypothesis $H_0: \beta_0 = 0$. Rejecting this hypothesis means that the two model do not have equal predictive power. The results for the estimated regression show that the difference is indeed statistically significant at 5% level, since p-value for $\hat \beta_0$ is 0.0185. The AR(1)-SARMA(1,1) model thus produced a more precise forecast than the naive forecast.
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9.5cm]{figures/hw07q01_fig08_txlubb3urn_eq1_dl.png}
+\end{center}
+
+
+
+# Conclusion
+
+As shown in this short note, even thought the data for unemployment rate in Lubbock County is only available since 1990, and thus the sample is relatively short, seasonal ARMA model performs quite well when applied to create its one step ahead forecast. The estimated model outperforms the naive forecasting method, producing significantly more precise forecast. 
+
+
+\newpage 
+
+
+# Appendix A
+
+Figure below shows the correlogram for the first difference in the unemployment rate
+$$
+  y_t = \Delta TXLUBB3URN_t = TXLUBB3URN_t - TXLUBB3URN_{t-1}
+$$
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig02_txlubb3urn_corr.png}
+\end{center}
+
+
+\newpage
+
+# Appendix B
+
+Figure below shows the correlogram for the residuals from the estimated AR(1)-SARMA(1,1) model
+$$
+    (1 - \phi_1 L) (1 - \phi_{12} L^{12}) y_t = \phi_0 + (1 + \theta_{12} L^{12}) \varepsilon_t
+$$
+
+\begin{center}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig05_txlubb3urn_eq1_resid_corr.png}
+\end{center}
+
+
+\newpage
+
+# Appendix C
+
+Below is the EViews code used.
+
+```
+series dtxlubb3urn = txlubb3urn - txlubb3urn(-1)
+
+' time series plot - txlubb3urn, whole sample
+freeze(g_txlubb3urn_ts_whole) txlubb3urn.line
+g_txlubb3urn_ts_whole.recshade
+g_txlubb3urn_ts_whole.addtext(ac) ""
+g_txlubb3urn_ts_whole.addtext(al)  "Unemployment Rate in Lubbock County, in %"
+
+' estimation sample
+smpl 1990m1 2013m12
+
+' time series plot - dtxlubb3urn
+freeze(g_dtxlubb3urn_ts) dtxlubb3urn.line
+g_dtxlubb3urn_ts.recshade
+g_dtxlubb3urn_ts.addtext(ac) ""
+g_dtxlubb3urn_ts.addtext(al) "Change in Unemployment Rate in Lubbock County, in %"
+
+' correlogram - dtxlubb3urn
+freeze(g_dtxlubb3urn_corr) dtxlubb3urn.correl(48)
+
+' estimate seasonal AR-SARMA model
+equation eq1.ls d(txlubb3urn) c ar(1) sar(12) sma(12)
+freeze(tbl_eq1) eq1
+
+' time series plot - residuals
+freeze(g_eq1_resid_ts) eq1.resid  
+g_eq1_resid_ts.recshade
+g_eq1_resid_ts.legend position(0,-0.35)
+g_eq1_resid_ts.legend -inbox
+g_eq1_resid_ts.addtext(al) "Actual vs Fitted Values, Seasonal ARMA model"
+
+' correlogram - residuals
+freeze(g_eq1_resid_corr) eq1.correl(48)
+
+' fixed scheme forecast and its 95% confidence interval
+smpl 2014m1 2019m2
+freeze(tbl_eq1_f_fixed) eq1.fit(f=na, e, g) txlubb3urn_f @se txlubb3urn_f_se
+
+series txlubb3urn_f_lb = txlubb3urn_f - 1.96* txlubb3urn_f_se
+series txlubb3urn_f_ub = txlubb3urn_f + 1.96* txlubb3urn_f_se
+
+' naive forecast
+series dtxlubb3urn_f_naive = dtxlubb3urn(-12)
+series txlubb3urn_f_naive = txlubb3urn(-1) + dtxlubb3urn_f_naive
+
+' plot forecast
+smpl 2014m1 2019m2
+smpl 2011m1 2019m2
+
+graph g_eq1_f.line txlubb3urn txlubb3urn_f txlubb3urn_f_lb txlubb3urn_f_ub
+
+g_eq1_f.setelem(1) linecolor(@rgb(0,0,0)) legend("Actual Data")
+g_eq1_f.setelem(2) linecolor(@rgb(0,0,255)) legend("Fixed Scheme Forecast")
+g_eq1_f.setelem(3) linecolor(@rgb(150,150,255)) legend("95% confidence interval")
+g_eq1_f.setelem(4) linecolor(@rgb(150,150,255)) legend("")
+g_eq1_f.options linepat
+g_eq1_f.legend columns(3)
+g_eq1_f.legend position(0,-0.1)
+g_eq1_f.legend -inbox
+g_eq1_f.addtext(al) "Forecast using Seasonal ARMA model"
+
+' calculate and plot forecast errors
+series txlubb3urn_e = txlubb3urn - txlubb3urn_f
+series txlubb3urn_e_naive = txlubb3urn - txlubb3urn_f_naive
+
+graph g_eq1_e.line txlubb3urn_e txlubb3urn_e_naive
+
+g_eq1_e.setelem(1) linecolor(@rgb(200,0,0)) legend("Forecast using Seasonal ARMA model")
+g_eq1_e.setelem(2) linecolor(@rgb(0,0,200)) legend("Naive Forecast")
+g_eq1_e.legend position(0,-0.35)
+g_eq1_e.legend -inbox
+g_eq1_e.addtext(al)  "Forecast error, Seasonal ARMA model vs Naive Forecast"
+
+' equal predictive ability test
+series L_ar = txlubb3urn_e^2
+series L_naive = txlubb3urn_e_naive^2
+series dL_naive = L_ar - L_naive 
+
+equation eq1_dL.ls dL_naive c 
+freeze(tbl_eq1_dL) eq1_dL
+```

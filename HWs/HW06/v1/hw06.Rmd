@@ -1,0 +1,78 @@
+---
+title: '**Homework 6**'
+subtitle: | 
+  | Eco 4306 Economic and Business Forecasting
+  | Spring 2019
+  | Due: report on April 2, 8am; slides on April 3, 8am; presentations will take place on April 5
+urlcolor: magenta
+linkcolor: magenta
+output:
+  pdf_document: default
+---
+
+\renewcommand{\baselinestretch}{1.15} \selectfont
+
+## **Problem 1** 
+
+\footnotesize \selectfont
+
+<!--
+----                 ----                                                                                           -----
+team                 time series                                                                                    transformation
+**A**wesome          Employment (Total Nonfarm Payrolls) [PAYNSA](https://fred.stlouisfed.org/series/PAYNSA)        \vspace*{0.6cm} $y_t = PAYNSA_t - PAYNSA_{t-1}$ 
+**B**rilliant        Unemployment Rate [UNRATENSA](https://fred.stlouisfed.org/series/UNRATENSA)                    \vspace*{0.6cm} $y_t = UNRATENSA_t - UNRATENSA_{t-1}$
+**C**ool             Industrial Production Index [IPB50001N](https://fred.stlouisfed.org/series/IPB50001N)          \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{IPB50001N_t - IPB50001N_{t-1}}{IPB50001N_{t-1}}$
+**D**ynamite         Retail Sales [RSAFSNA](https://fred.stlouisfed.org/series/RSAFSNA)                             \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{RSAFSNA_t - RSAFSNA_{t-1}}{RSAFSNA_{t-1}}$
+**E**xtraordinaire   Private Nonresidential Investment [NA000336Q](https://fred.stlouisfed.org/series/NA000336Q)    \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{NA000336Q_t - NA000336Q_{t-1}}{NA000336Q_{t-1}}$
+**F**antastic        Vehicle Miles Traveled [TRFVOLUSM227NFWA](https://fred.stlouisfed.org/series/TRFVOLUSM227NFWA) \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{NA000336Q_t - NA000336Q_{t-1}}{NA000336Q_{t-1}}$
+**G**enius           Electric Power Generation [IPG22111N](https://fred.stlouisfed.org/series/IPG22111N)            \vspace*{0.2cm} $\displaystyle y_t = 100 \frac{NA000336Q_t - NA000336Q_{t-1}}{NA000336Q_{t-1}}$
+----                 ----                                                                                           -----
+-->
+
+
+\normalsize \selectfont
+
+
+(a) Download data for your topic from FRED. Get the longest sample that's available on FRED and import it into EViews. Generate the series $y_t$ as specified below for the whole sample. Then change the sample to the one specified above and create time series plot and correlogram for time series $y_t$. 
+
+\footnotesize \selectfont
+
+----                                                                                           -----                -----
+time series                                                                                    estimation sample    transformation
+Employment (Total Nonfarm Payrolls) [PAYNSA](https://fred.stlouisfed.org/series/PAYNSA)        1970M1-2006M12       \vspace*{0.4cm} $\displaystyle y_t = 100 = \frac{PAYNSA_t - PAYNSA_{t-1}}{PAYNSA_{t-1}}$ 
+Unemployment Rate [UNRATENSA](https://fred.stlouisfed.org/series/UNRATENSA)                    1960M1-2006M12       \vspace*{0.5cm} $y_t = UNRATENSA_t - UNRATENSA_{t-1}$
+Industrial Production Index [IPB50001N](https://fred.stlouisfed.org/series/IPB50001N)          1970M1-2006M12       \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{IPB50001N_t - IPB50001N_{t-1}}{IPB50001N_{t-1}}$
+Retail Sales [RSAFSNA](https://fred.stlouisfed.org/series/RSAFSNA)                             1992M1-2006M12       \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{RSAFSNA_t - RSAFSNA_{t-1}}{RSAFSNA_{t-1}}$
+Private Nonresidential Investment [NA000336Q](https://fred.stlouisfed.org/series/NA000336Q)    1960Q1-2006Q4        \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{NA000336Q_t - NA000336Q_{t-1}}{NA000336Q_{t-1}}$
+Vehicle Miles Traveled [TRFVOLUSM227NFWA](https://fred.stlouisfed.org/series/TRFVOLUSM227NFWA) 1970M1-2006M12       \vspace*{0.4cm} $\displaystyle y_t = 100 \frac{TRFVMT_t - TRFVMT_{t-1}}{TRFVMT_{t-1}}$
+Electric Power Generation [IPG22111N](https://fred.stlouisfed.org/series/IPG22111N)            1980M1-2006M12       \vspace*{0.2cm} $\displaystyle y_t = 100 \frac{IPG22111N_t - IPG22111N_{t-1}}{IPG22111N_{t-1}}$
+----                                                                                           -----                -----
+\normalsize \selectfont
+
+(b) Estimate a suitable ARMA($p,Q$)+S-ARMA($P,Q$) model for $y_t$ for the estimation sample. Create a time series plot with residuals and the correlogram for residuals. If the residuals do not appear to be white noise based on these two plots, modify your model appropriately. Report only the estimation results, residuals plot and correlogram for the final model you decide to select, but explain why you selected that particular model over possible alternatives. Note: for unemployment rate topic estimate the model for D(UNRATENSA) instead of $y_t$, so that in (c) you can forecast UNRATENSA  directly.
+
+(c) Using fixed forecasting scheme create a sequence of one step ahead forecasts for period 2007 to 2018. Also generate the standard errors for this forecast to construct the 95\% confidence interval. Plot the actual data together with the forecast and its 95% confidence interval for the period 2005 to 2018. Hint: to generate the fixed scheme forecast in EViews, remember to use the "Static forecast" method option.
+
+(d) Create a naive forecast for the period from 2007 to 2018. Calculate the forecast error for the naive forecast and also for the forecast from (c). Plot them together in one plot. How do they compare, is one of the forecasts visibly worse, resulting in higher losses or are they roughly comparable?
+
+(e) Use forecast errors from (d) to calculate the losses assuming simple quadratic loss function $L(e) = e^2$. Use these losses to perform the equal predictive ability test comparing the precision of the naive forecast and the forecast from your ARMA($p,Q$)+S-ARMA($P,Q$) model. Interpret the results.
+
+
+\newpage
+
+## **Problem 1 Additional Instructions** 
+
+You should submit your work in form of a short report; an example of one forecasting the unemployment Rate in Lubbock County can be found here: [myweb.ttu.edu/jduras/files/teaching/eco4306/hw06example.pdf](http://myweb.ttu.edu/jduras/files/teaching/eco4306/hw06example.pdf)
+
+You will also need to prepare a short presentation (5-10 minutes) summarizing your work.
+
+Your classmates will provide feedback and evaluate your presentation using a form tha can be found here:  
+[https://forms.gle/siJsTgkDz2KxaBWR6](https://forms.gle/siJsTgkDz2KxaBWR6) 
+
+Members of your team will evaluate your work using this a form tha can be found here:  
+[https://forms.gle/py5qWCjEe2ECyw6p6](https://forms.gle/py5qWCjEe2ECyw6p6)
+es
+
+
+
+
