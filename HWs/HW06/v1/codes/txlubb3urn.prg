@@ -128,8 +128,8 @@ graph gph_eq1_e.line txlubb3urn_e txlubb3urn_e_naive
 gph_eq1_e.axis(l) range(-0.7,0.7)
 gph_eq1_e.options linepat
 gph_eq1_e.options size(9,3)
-gph_eq1_e.setelem(1) linepattern(DASH1) linecolor(@rgb(255,0,0)) linewidth(1) legend("Forecast using Seasonal ARMA model")
-gph_eq1_e.setelem(2) linepattern(SOLID) linecolor(@rgb(40,40,40)) linewidth(1) legend("Naive Forecast")
+gph_eq1_e.setelem(1) linepattern(DASH1) linecolor(@rgb(255,0,0)) linewidth(1.5) legend("Forecast using Seasonal ARMA model")
+gph_eq1_e.setelem(2) linepattern(SOLID) linecolor(@rgb(80,80,80)) linewidth(1) legend("Naive Forecast")
 gph_eq1_e.datelabel format("YYYY")
 gph_eq1_e.axis(l) format(suffix="%")
 gph_eq1_e.legend position(0,-0.35)
