@@ -44,7 +44,7 @@ Outline
 - sample: January 1990 to January 2019 
 
 \begin{center}
-    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig00_txlubb3urn_ts_whole.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_txlubb3urn_fig00_ts_whole.png}
 \end{center}
 
 - estimation sample: January 1990 to December 2013
@@ -62,7 +62,7 @@ $$
 
 - time series $y_t$ exhibits seasonal variation 
 \begin{center}
-    \includegraphics[trim=0.5cm 0cm -0.5cm 0cm, clip, width=9cm]{figures/hw07q01_fig01_txlubb3urn_ts.png}
+    \includegraphics[trim=0.5cm 0cm -0.5cm 0cm, clip, width=9cm]{figures/hw07q01_txlubb3urn_fig01_ts.png}
 \end{center}
 
 
@@ -74,7 +74,7 @@ $$
 - large spike in PAC at lags 12 and 24, and large spikes at multiples of 12 in AC
 
 \begin{center}
-    \includegraphics[trim=0cm 5.25cm -1cm 1.6cm, clip, width=4.5cm]{figures/hw07q01_fig02_txlubb3urn_corr.png}
+    \includegraphics[trim=0cm 5.25cm -1cm 1.6cm, clip, width=4.5cm]{figures/hw07q01_txlubb3urn_fig02_corr.png}
 \end{center}
 
 
@@ -89,7 +89,7 @@ $$
 $$
 - estimation results
 \begin{center}
-    \includegraphics[trim=0cm 3.6cm 0cm 0cm, clip, width=5.5cm]{figures/hw07q01_fig03_txlubb3urn_eq1.png}
+    \includegraphics[trim=0cm 3.6cm 0cm 0cm, clip, width=5.5cm]{figures/hw07q01_txlubb3urn_fig03_eq1.png}
 \end{center}
 - estimated model thus takes the form
 $$
@@ -106,8 +106,8 @@ residuals of the estimated AR(1)-SARMA(1,1) model appear to be white noise
 - no remaining significant time dependence in correlogram
 \begin{center}
     \hspace*{-1cm}
-    \includegraphics[trim=1cm -9cm 0.5cm 0cm, clip, width=5.5cm]{figures/hw07q01_fig04_txlubb3urn_eq1_resid_ts.png}
-    \includegraphics[trim=0cm 5.25cm -1cm 1.6cm, clip, width=4.5cm]{figures/hw07q01_fig05_txlubb3urn_eq1_resid_corr.png}
+    \includegraphics[trim=1cm -9cm 0.5cm 0cm, clip, width=5.5cm]{figures/hw07q01_txlubb3urn_fig04_eq1_resid_ts.png}
+    \includegraphics[trim=0cm 5.25cm -1cm 1.6cm, clip, width=4.5cm]{figures/hw07q01_txlubb3urn_fig05_eq1_resid_corr.png}
 \end{center}
 
 
@@ -121,7 +121,7 @@ residuals of the estimated AR(1)-SARMA(1,1) model appear to be white noise
 - forecast tracks actual data quite well
 
 \begin{center}
-    \includegraphics[trim=0cm 0.5cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig06_txlubb3urn_eq1_f.png}
+    \includegraphics[trim=0cm 0.5cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_txlubb3urn_fig06_eq1_f.png}
 \end{center}
 
 
@@ -135,7 +135,7 @@ residuals of the estimated AR(1)-SARMA(1,1) model appear to be white noise
 - forecast errors $e_{t+1} = y_{t+1} - f_{t,1}$
 
 \begin{center}
-    \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm, clip, width=9cm]{figures/hw07q01_fig07_txlubb3urn_eq1_e.png}
+    \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm, clip, width=9cm]{figures/hw07q01_txlubb3urn_fig07_eq1_e.png}
 \end{center}
 
 - root mean squared error (RMSE)  
@@ -159,7 +159,7 @@ $$
 is the difference between the losses associated with the two alternative forecasts
 
 \begin{center}
-    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=5.5cm]{figures/hw07q01_fig08_txlubb3urn_eq1_dl.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=5.5cm]{figures/hw07q01_txlubb3urn_fig08_eq1_dl.png}
 \end{center}
 
 - since p-value for $\hat \beta_0$ is 0.0185 difference is indeed statistically significant at 5% level

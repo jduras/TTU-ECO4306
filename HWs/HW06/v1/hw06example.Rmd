@@ -24,7 +24,7 @@ The goal of this short report is to present the analysis undertaken to estimate 
 Monthly data for the Unemployment Rate in Lubbock County, TX for the period from January 1990 to January 2019 was obtained from FRED, where it is available under the code [TXLUBB3URN](https://fred.stlouisfed.org/series/TXLUBB3URN). Figure below shows the time series plot for the whole sample.
 
 \begin{center}
-    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16cm]{figures/hw07q01_fig00_txlubb3urn_ts_whole.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16cm]{figures/hw07q01_txlubb3urn_fig00_ts_whole.png}
 \end{center}
 
 The estimation sample used to identify and estimate suitable model is January 1990 to December 2013. The remaining part, from January 2014 to January 2019 will be used to evaluate the precision of the forecast. To address the potential problem with non-stationarity, first difference was applied to obtain the change in the unemployment rate
@@ -33,7 +33,7 @@ $$
 $$
 Figure below shows this transformed time series $y_t$, which exhibits seasonal variation with significant spikes in January each year when less work is available in agriculture and construction, and also in June of each year when new graduate enter the labor market.
 \begin{center}
-    \includegraphics[trim=0.5cm 0cm -0.5cm 0cm, clip, width=17cm]{figures/hw07q01_fig01_txlubb3urn_ts.png}
+    \includegraphics[trim=0.5cm 0cm -0.5cm 0cm, clip, width=17cm]{figures/hw07q01_txlubb3urn_fig01_ts.png}
 \end{center}
 
 The correlogram of the change in the unemployment rate $y_t$ shown in Appendix A confirms the presence of a seasonal pattern, reflected by a large spike in PAC at lags 12 and 24, and large spikes at multiples of 12 in AC. 
@@ -48,7 +48,7 @@ $$
 $$
 Figure below shows the results of the estimation
 \begin{center}
-    \includegraphics[trim=0cm 3.5cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig03_txlubb3urn_eq1.png}
+    \includegraphics[trim=0cm 3.5cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_txlubb3urn_fig03_eq1.png}
 \end{center}
 The estimated model thus takes the form
 $$
@@ -57,7 +57,7 @@ $$
 
 Residuals are plotted below, they do not appear to show any recognizable pattern, or any changes in volatility over the estimation sample.
 \begin{center}
-    \includegraphics[trim=0.5cm 0cm 0cm 0cm, clip, width=17cm]{figures/hw07q01_fig04_txlubb3urn_eq1_resid_ts.png}
+    \includegraphics[trim=0.5cm 0cm 0cm 0cm, clip, width=17cm]{figures/hw07q01_txlubb3urn_fig04_eq1_resid_ts.png}
 \end{center}
 Residuals also do not appear to show any remaining significant time dependence, as shown in their correlogram in Appendix B. All components of the AC and PAC functions are within the 95% confidence interval around 0 and the p-values of Ljung-Box statistic are in general large, and are all above 0.3. We can thus conclude that the residuals of the estimated AR(1)-SARMA(1,1) model appear to be white noise.
 
@@ -69,7 +69,7 @@ As mentioned above, period from January 2014 to January 2019 was used as predict
 
 First, a sequence of one step ahead forecasts was created, together with their 95% confidence interval. They are plotted in the figure below. In general the model forecast is reasonably precise, and can fit the actual path of unemployment rate in Lubbock county well.
 \begin{center}
-    \includegraphics[trim=0cm 0.5cm 0cm 0cm, clip, width=17cm]{figures/hw07q01_fig06_txlubb3urn_eq1_f.png}
+    \includegraphics[trim=0cm 0.5cm 0cm 0cm, clip, width=17cm]{figures/hw07q01_txlubb3urn_fig06_eq1_f.png}
 \end{center}
 
 Next, as a benchmark, a simple naive forecast was created for the change in unemployment rate in the same prediction sample January 2014 to January 2019 using 
@@ -86,7 +86,7 @@ $$
 $$
 and are plotted below
 \begin{center}
-    \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm, clip, width=16.5cm]{figures/hw07q01_fig07_txlubb3urn_eq1_e.png}
+    \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm, clip, width=16.5cm]{figures/hw07q01_txlubb3urn_fig07_eq1_e.png}
 \end{center}
 
 The forecast errors tend to be somewhat smaller in the magnitude. The root mean squared error (RMSE) for forecast using the AR(1)-SARMA(1,1) model is 0.180, while the root mean squared error for forecast using naive forecasting method is 0.221. Thus for both methods it is roughly 0.2 percentage points in the sample where the unemployment rate has been fluctuating in the range from 2.8 to 4.8 percentage points. 
@@ -101,7 +101,7 @@ $$
 $$
 and testing the hypothesis $H_0: \beta_0 = 0$. Rejecting this hypothesis means that the two model do not have equal predictive power. The results for the estimated regression show that the difference is indeed statistically significant at 5% level, since p-value for $\hat \beta_0$ is 0.0185. The AR(1)-SARMA(1,1) model thus produced a more precise forecast than the naive forecast.
 \begin{center}
-    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9.5cm]{figures/hw07q01_fig08_txlubb3urn_eq1_dl.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9.5cm]{figures/hw07q01_txlubb3urn_fig08_eq1_dl.png}
 \end{center}
 
 
@@ -122,7 +122,7 @@ $$
 $$
 
 \begin{center}
-    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig02_txlubb3urn_corr.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_txlubb3urn_fig02_corr.png}
 \end{center}
 
 
@@ -136,7 +136,7 @@ $$
 $$
 
 \begin{center}
-    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_fig05_txlubb3urn_eq1_resid_corr.png}
+    \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=9cm]{figures/hw07q01_txlubb3urn_fig05_eq1_resid_corr.png}
 \end{center}
 
 
@@ -198,8 +198,8 @@ smpl 2011m1 2019m2
 
 graph g_eq1_f.line txlubb3urn txlubb3urn_f txlubb3urn_f_lb txlubb3urn_f_ub
 
-g_eq1_f.setelem(1) linecolor(@rgb(0,0,0)) legend("Actual Data")
-g_eq1_f.setelem(2) linecolor(@rgb(0,0,255)) legend("Fixed Scheme Forecast")
+g_eq1_f.setelem(1) linecolor(@rgb(0,0,0)) legend("Actual")
+g_eq1_f.setelem(2) linecolor(@rgb(0,0,255)) legend("Forecast")
 g_eq1_f.setelem(3) linecolor(@rgb(150,150,255)) legend("95% confidence interval")
 g_eq1_f.setelem(4) linecolor(@rgb(150,150,255)) legend("")
 g_eq1_f.options linepat
