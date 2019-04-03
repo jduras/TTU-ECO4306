@@ -131,9 +131,26 @@ show gph_eq1_e
 
 ' 5. Equal predictive ability test
 
-series {%series_code_fcst}_l_ar = {%series_code_fcst}_e^2
+series {%series_code_fcst}_l = {%series_code_fcst}_e^2
 series {%series_code_fcst}_l_naive = {%series_code_fcst}_e_naive^2
-series {%series_code_fcst}_dl = {%series_code_fcst}_l_ar - {%series_code_fcst}_l_naive
+
+' plot loss
+graph gph_eq1_l.line {%series_code_fcst}_l {%series_code_fcst}_l_naive
+
+gph_eq1_l.recshade
+gph_eq1_l.options linepat
+gph_eq1_l.options size(9,3)
+gph_eq1_l.setelem(1) linepattern(DASH1) linecolor(@rgb(255,0,0)) linewidth(1.5) legend("Quadratic Loss for Forecast using Seasonal ARMA model")
+gph_eq1_l.setelem(2) linepattern(SOLID) linecolor(@rgb(80,80,80)) linewidth(1) legend("Quadratic Loss for Naive Forecast")
+gph_eq1_l.datelabel format("YYYY")
+gph_eq1_l.legend position(0,-0.5)
+gph_eq1_l.legend -inbox
+gph_eq1_l.addtext(0, -0.75, font(Calibri,13,-b,-i,-u,-s))  {%series_title_fcst}, Quadratic Loss associated with Forecast errors, Seasonal ARMA model vs Naive Forecast
+
+show gph_eq1_l
+
+
+series {%series_code_fcst}_dl = {%series_code_fcst}_l - {%series_code_fcst}_l_naive
 
 equation eq1_dL.ls {%series_code_fcst}_dl c 
 freeze(tbl_eq1_dl) eq1_dl
@@ -155,6 +172,7 @@ gph_eq1_resid_corr.save(t=png) hw07q01_{%series_code}_fig05_eq1_resid_corr
 
 gph_eq1_f.save(t=png, w=12) hw07q01_{%series_code}_fig06_eq1_f
 gph_eq1_e.save(t=png, w=12) hw07q01_{%series_code}_fig07_eq1_e
+gph_eq1_l.save(t=png, w=12) hw07q01_{%series_code}_fig07_eq1_l
 tbl_eq1_dl.save(t=png) hw07q01_{%series_code}_fig08_eq1_dl
 
 cd %codepath
