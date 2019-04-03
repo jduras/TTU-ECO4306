@@ -92,7 +92,10 @@ show gph_eq1_f
 	
 ' naive forecast
 smpl %sample_prediction
-series {%series_code_trans}_f_naive = {%series_code_trans}(-12)
+if @pagefreq = "Q" then !f = 4 endif
+if @pagefreq = "M" then !f = 12 endif
+
+series {%series_code_trans}_f_naive = {%series_code_trans}(-!f)
 
 if %in_diff = "true" then
 	series {%series_code}_f_naive = {%series_code}(-1) + {%series_code_trans}_f_naive
@@ -159,3 +162,5 @@ cd %codepath
 wfsave {%series_code}.wf1
 
 ' wfclose
+
+

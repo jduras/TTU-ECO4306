@@ -69,16 +69,16 @@ freeze(gph_eq_sto_04_arma) eq_sto_04.arma
 ' smpl 2006q1 2017q4
 smpl 2010q1 2035q4
 
-eq_det_03.forecast(f=na, e, g) rGDP_f_det_multi @se rGDP_f_det_multi_se
-eq_det_03.fit(f=na, e, g) rGDP_f_det_fixed @se rGDP_f_det_fixed_se
+freeze(tbl_f_det_multi) eq_det_03.forecast(f=na, e, g) rGDP_f_det_multi @se rGDP_f_det_multi_se
+freeze(tbl_f_det_fixed) eq_det_03.fit(f=na, e, g) rGDP_f_det_fixed @se rGDP_f_det_fixed_se
 
 genr rGDP_f_det_multi_lb = rGDP_f_det_multi - 1.96*rGDP_f_det_multi_se
 genr rGDP_f_det_multi_ub = rGDP_f_det_multi + 1.96*rGDP_f_det_multi_se
 genr rGDP_f_det_fixed_lb = rGDP_f_det_fixed - 1.96*rGDP_f_det_fixed_se
 genr rGDP_f_det_fixed_ub = rGDP_f_det_fixed + 1.96*rGDP_f_det_fixed_se
 
-eq_sto_03.forecast(f=na, e, g) rGDP_f_sto_multi @se rGDP_f_sto_multi_se
-eq_sto_03.fit(f=na, e, g) rGDP_f_sto_fixed @se rGDP_f_sto_fixed_se
+freeze(tbl_f_sto_multi) eq_sto_03.forecast(f=na, e, g) rGDP_f_sto_multi @se rGDP_f_sto_multi_se
+freeze(tbl_f_sto_fixed) eq_sto_03.fit(f=na, e, g) rGDP_f_sto_fixed @se rGDP_f_sto_fixed_se
 
 genr rGDP_f_sto_multi_lb = rGDP_f_sto_multi - 1.96*rGDP_f_sto_multi_se
 genr rGDP_f_sto_multi_ub = rGDP_f_sto_multi + 1.96*rGDP_f_sto_multi_se
