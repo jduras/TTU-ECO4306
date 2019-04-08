@@ -191,7 +191,7 @@ adf_lrGDP_d.save(t=png) lec19_adf_lrgdp_d
 freeze(tbl_eq_sto_01) eq_sto_01
 tbl_eq_sto_01.save(t=png) lec19_rgdp_eq_sto_01
 gph_eq_sto_01_resid.save(t=png,w=15,h=7,u=in) lec19_rgdp_eq_sto_01_resid
-gph_eq_sto_01_resid_corr.save(t=png) lec19_rgdp_eqsto_01_resid_corr
+gph_eq_sto_01_resid_corr.save(t=png) lec19_rgdp_eq_sto_01_resid_corr
 
 freeze(tbl_eq_sto_02) eq_sto_02
 tbl_eq_sto_02.save(t=png) lec19_rgdp_eq_sto_02
