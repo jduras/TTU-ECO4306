@@ -61,9 +61,11 @@ freeze(gph_eq1_resid_corr) eq1.correl(48)
 
 ' 3. Forecasts
 
-' fixed scheme forecast
 smpl %sample_prediction
-freeze(tbl_eq1_f_fixed) eq1.fit(f=na, e, g) {%series_code_fcst}_f @se {%series_code_fcst}_f_se
+' multistep forecast
+' freeze(tbl_eq1_f_fixed) eq1.forecast(f=na, e, g) {%series_code_fcst}_f @se {%series_code_fcst}_f_se
+' fixed scheme forecast
+ freeze(tbl_eq1_f_fixed) eq1.fit(f=na, e, g) {%series_code_fcst}_f @se {%series_code_fcst}_f_se
 
 ' lower and upper bounds of 95% confidence intevrals
 series {%series_code_fcst}_f_lb = {%series_code_fcst}_f - 1.96* {%series_code_fcst}_f_se
@@ -150,14 +152,104 @@ gph_eq1_l.addtext(0, -0.75, font(Calibri,13,-b,-i,-u,-s))  {%series_title_fcst},
 show gph_eq1_l
 
 
-series {%series_code_fcst}_dl = {%series_code_fcst}_l - {%series_code_fcst}_l_naive
+series {%series_code_fcst}_dl_naive = {%series_code_fcst}_l - {%series_code_fcst}_l_naive
 
-equation eq1_dL.ls {%series_code_fcst}_dl c 
-freeze(tbl_eq1_dl) eq1_dl
+equation eq1_epa_naive.ls {%series_code_fcst}_dl_naive c 
+freeze(tbl_eq1_epa_naive) eq1_epa_naive
 
 
 
-' 6. Save figures and tables
+' 6. Combined forecasts
+
+' next, construct combined forecasts with
+' 1) weights based on MSE
+' 2) equal weights 
+' 3) weight based on OLS to get the best fit
+
+' mean square error (MSE)
+scalar {%series_code_fcst}_MSE = @mean({%series_code_fcst}_l)
+scalar {%series_code_fcst}_MSE_naive = @mean({%series_code_fcst}_l_naive)
+
+' weights based on 1/MSE
+scalar {%series_code_fcst}_w = 1/{%series_code_fcst}_MSE / ( 1/{%series_code_fcst}_MSE + 1/{%series_code_fcst}_MSE_naive )
+scalar {%series_code_fcst}_w_naive = 1/{%series_code_fcst}_MSE_naive / ( 1/{%series_code_fcst}_MSE + 1/{%series_code_fcst}_MSE_naive )
+
+' combined forecast - equal weights
+series {%series_code_fcst}_f_combined1 = 1/2* ({%series_code_fcst}_f + {%series_code_fcst}_f_naive)
+
+' combined forecast - weights based on 1/MSE
+series {%series_code_fcst}_f_combined2 = {%series_code_fcst}_w*{%series_code_fcst}_f + {%series_code_fcst}_w_naive*{%series_code_fcst}_f_naive
+
+' combined forecast - weights based on OLS
+equation eq1_f_weights.ls {%series_code_fcst} c {%series_code_fcst}_f {%series_code_fcst}_f_naive
+series {%series_code_fcst}_f_combined3 = c(1) + c(2)*{%series_code_fcst}_f + c(3)*{%series_code_fcst}_f_naive
+
+' forecast errors - combined forecasts
+series {%series_code_fcst}_e_combined1 = {%series_code_fcst} - {%series_code_fcst}_f_combined1
+series {%series_code_fcst}_e_combined2 = {%series_code_fcst} - {%series_code_fcst}_f_combined2
+series {%series_code_fcst}_e_combined3 = {%series_code_fcst} - {%series_code_fcst}_f_combined3
+
+' loss based on symmetric quadratic loss function
+series {%series_code_fcst}_l_combined1 = {%series_code_fcst}_e_combined1^2
+series {%series_code_fcst}_l_combined2 = {%series_code_fcst}_e_combined2^2
+series {%series_code_fcst}_l_combined3 = {%series_code_fcst}_e_combined3^2
+
+group grp_fcsts {%series_code_fcst}_l {%series_code_fcst}_l_naive {%series_code_fcst}_l_combined1 {%series_code_fcst}_l_combined2 {%series_code_fcst}_l_combined3
+grp_fcsts.stats
+
+' plot combined forecast 
+smpl %sample_prediction_plot
+
+graph gph_eq1_f_combined3.line {%series_code_fcst} {%series_code_fcst}_f {%series_code_fcst}_f_combined3 
+
+gph_eq1_f_combined3.recshade
+gph_eq1_f_combined3.setelem(1) linepattern(SOLID) linecolor(@rgb(55,105,175)) linewidth(0.75) legend("Actual")
+gph_eq1_f_combined3.setelem(2) linepattern(SOLID) linecolor(@rgb(255,0,0)) linewidth(0.75) legend("Forecast based on SARMA model")
+gph_eq1_f_combined3.setelem(3) linepattern(SOLID) linecolor(@rgb(255,0,255)) linewidth(1) legend("Combined Forecast (OLS based weights)")
+gph_eq1_f_combined3.datelabel format("YYYY")
+gph_eq1_f_combined3.options linepat
+gph_eq1_f_combined3.options size(9,3)
+gph_eq1_f_combined3.axis(l) format(suffix="%")
+gph_eq1_f_combined3.legend columns(3)
+gph_eq1_f_combined3.legend position(0,-0.45)
+gph_eq1_f_combined3.legend -inbox
+gph_eq1_f_combined3.addtext(0, -0.75, font(Calibri,13,-b,-i,-u,-s))  {%series_title_fcst}, Combined Forecast
+
+show gph_eq1_f_combined3 
+
+' plot loss
+smpl %sample_prediction
+
+graph gph_eq1_l_combined3.line {%series_code_fcst}_l {%series_code_fcst}_l_naive {%series_code_fcst}_l_combined3
+
+gph_eq1_l_combined3.recshade
+gph_eq1_l_combined3.options linepat
+gph_eq1_l_combined3.options size(9,3)
+gph_eq1_l_combined3.setelem(1) linepattern(DASH1) linecolor(@rgb(255,0,0)) linewidth(0.75) legend("Quadratic Loss for Forecast using Seasonal ARMA model")
+gph_eq1_l_combined3.setelem(2) linepattern(SOLID) linecolor(@rgb(80,80,80)) linewidth(0.75) legend("Quadratic Loss for Naive Forecast")
+gph_eq1_l_combined3.setelem(3) linepattern(SOLID) linecolor(@rgb(255,0,255)) linewidth(1.5) legend("Quadratic Loss for Combined Forecast (OLS based weights)")
+gph_eq1_l_combined3.datelabel format("YYYY")
+gph_eq1_l_combined3.legend position(0,-0.5)
+gph_eq1_l_combined3.legend -inbox
+gph_eq1_l_combined3.addtext(0, -0.75, font(Calibri,13,-b,-i,-u,-s))  {%series_title_fcst}, Quadratic Loss associated with Forecast errors
+
+show gph_eq1_l_combined3
+
+
+
+' test for equal predictive ability
+series {%series_code_fcst}_dl_combined1 = {%series_code_fcst}_l_combined1 - {%series_code_fcst}_l
+series {%series_code_fcst}_dl_combined2 = {%series_code_fcst}_l_combined2 - {%series_code_fcst}_l
+series {%series_code_fcst}_dl_combined3 = {%series_code_fcst}_l_combined3 - {%series_code_fcst}_l
+
+equation eq1_epa_combined1.ls(cov=hac) {%series_code_fcst}_dl_combined1 c 
+equation eq1_epa_combined2.ls(cov=hac) {%series_code_fcst}_dl_combined2 c 
+equation eq1_epa_combined3.ls(cov=hac) {%series_code_fcst}_dl_combined3 c 
+
+freeze(tbl_eq1_epa_combined3) eq1_epa_combined3
+
+
+' 7. Save figures and tables
 
 cd %figpath
 
@@ -171,9 +263,12 @@ gph_eq1_resid_ts.save(t=png, w=12) hw07q01_{%series_code}_fig04_eq1_resid_ts
 gph_eq1_resid_corr.save(t=png) hw07q01_{%series_code}_fig05_eq1_resid_corr
 
 gph_eq1_f.save(t=png, w=12) hw07q01_{%series_code}_fig06_eq1_f
+gph_eq1_f_combined3.save(t=png, w=12) hw07q01_{%series_code}_fig06_eq1_f_combined3
 gph_eq1_e.save(t=png, w=12) hw07q01_{%series_code}_fig07_eq1_e
 gph_eq1_l.save(t=png, w=12) hw07q01_{%series_code}_fig07_eq1_l
-tbl_eq1_dl.save(t=png) hw07q01_{%series_code}_fig08_eq1_dl
+gph_eq1_l_combined3.save(t=png, w=12) hw07q01_{%series_code}_fig07_eq1_l_combined3
+tbl_eq1_epa_naive.save(t=png) hw07q01_{%series_code}_fig08_eq1_epa_naive
+tbl_eq1_epa_combined3.save(t=png) hw07q01_{%series_code}_fig08_eq1_epa_combined3
 
 cd %codepath
 
